@@ -4,8 +4,10 @@ export type Candidate = {
   email: string;
   profileData: string;
   
+  // Décision importée de l'école
+  decision: "accept" | "reject" | "waitlist" | "unknown";
+  
   // Champs générés par l'IA
-  aiDecision?: "accept" | "reject" | "waitlist";
   aiExplanation?: string[];
   aiEmailDraft?: string;
   
