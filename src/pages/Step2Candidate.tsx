@@ -43,13 +43,21 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
 
   const handleSimulateUpload = () => {
     const mockData: Candidate[] = [
-      {
-        id: "1",
-        name: "Léa Martin",
-        email: "lea.martin@email.com",
-        profileData: "Bac S mention Très Bien. Projet associatif fort en écologie. Lettre de motivation très structurée et claire.",
-      },
-      // ... autres mock data
+      { id: "1", name: "Léa Martin", email: "lea.martin@email.com", profileData: "Bac S mention Très Bien. Projet associatif fort en écologie. Lettre de motivation très structurée et claire." },
+      { id: "2", name: "Thomas Dubois", email: "thomas.d@email.com", profileData: "Bac ES mention Assez Bien. Notes moyennes en mathématiques. Activité sportive niveau régional." },
+      { id: "3", name: "Sarah Connor", email: "sarah.c@email.com", profileData: "Reconversion professionnelle. 5 ans d'expérience en marketing. Très motivée par le digital." },
+      { id: "4", name: "Lucas Bernard", email: "lucas.b@email.com", profileData: "Bac STI2D. Passionné d'informatique. Excellentes notes en projet technique, difficultés en anglais." },
+      { id: "5", name: "Amira Diallo", email: "amira.d@email.com", profileData: "Licence de Droit validée. Profil analytique très rigoureux. Stages pertinents en cabinet." },
+      { id: "6", name: "Hugo Petit", email: "hugo.p@email.com", profileData: "Dossier très faible. Nombreuses absences injustifiées. Motivation générique." },
+      { id: "7", name: "Clara Leroy", email: "clara.l@email.com", profileData: "Excellents résultats en prépa littéraire. Esprit de synthèse remarquable. Très bonne plume." },
+      { id: "8", name: "Marc Antoine", email: "marc.a@email.com", profileData: "BTS Commerce International. Profil commercial affirmé. A monté sa propre micro-entreprise." },
+      { id: "9", name: "Sophie Dubois", email: "sophie.d@email.com", profileData: "Licence d'Histoire de l'Art. Profil atypique mais curieux. Expérience de bénévolat à l'étranger." },
+      { id: "10", name: "Antoine Griezmann", email: "antoine.g@email.com", profileData: "Sportif de haut niveau en reconversion. Grande capacité de travail et résistance au stress." },
+      { id: "11", name: "Juliette Rousseau", email: "juliette.r@email.com", profileData: "Master 1 en biologie. Excellente élève. Cherche une double compétence en management." },
+      { id: "12", name: "Maxime Chen", email: "maxime.c@email.com", profileData: "Candidature incomplète. Lettre de motivation manquante. Notes moyennes." },
+      { id: "13", name: "Elodie Farès", email: "elodie.f@email.com", profileData: "3 ans d'expérience comme assistante RH. Profil très structuré, excellentes recommandations." },
+      { id: "14", name: "Nicolas Moreau", email: "nicolas.m@email.com", profileData: "Profil entrepreneurial. A déjà créé 2 startups. Tire de bonnes leçons de ses échecs." },
+      { id: "15", name: "Alice Dupont", email: "alice.d@email.com", profileData: "Excellents résultats au Bac. Première année ratée, cherche à se réorienter. Très travailleuse." },
     ];
     setFileName("candidats_mock.csv");
     setCandidates(mockData);
