@@ -4,15 +4,14 @@ import Step1Criteria from './pages/Step1Criteria'
 import Step2Candidate from './pages/Step2Candidate'
 import Step3Generate from './pages/Step3Generate'
 import Step4Response from './pages/Step4Response'
+import { Candidate } from './types'
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
   
   // App State
   const [schoolCriteria, setSchoolCriteria] = useState("");
-  const [candidateName, setCandidateName] = useState("");
-  const [candidateProfile, setCandidateProfile] = useState("");
-  const [generatedResponse, setGeneratedResponse] = useState("");
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
 
   const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, 4));
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
@@ -24,7 +23,7 @@ function App() {
         <div className="text-sm text-slate-500">Prototype Hackathon</div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8">
         <Stepper currentStep={currentStep} />
         
         <div className="mt-8">
@@ -37,10 +36,8 @@ function App() {
           )}
           {currentStep === 2 && (
             <Step2Candidate 
-              candidateName={candidateName}
-              setCandidateName={setCandidateName}
-              candidateProfile={candidateProfile}
-              setCandidateProfile={setCandidateProfile}
+              candidates={candidates}
+              setCandidates={setCandidates}
               onNext={nextStep}
               onPrev={prevStep}
             />
@@ -48,21 +45,18 @@ function App() {
           {currentStep === 3 && (
             <Step3Generate 
               schoolCriteria={schoolCriteria}
-              candidateName={candidateName}
-              candidateProfile={candidateProfile}
-              setGeneratedResponse={setGeneratedResponse}
+              candidates={candidates}
+              setCandidates={setCandidates}
               onNext={nextStep}
             />
           )}
           {currentStep === 4 && (
             <Step4Response 
-              generatedResponse={generatedResponse}
-              setGeneratedResponse={setGeneratedResponse}
+              candidates={candidates}
+              setCandidates={setCandidates}
               onPrev={prevStep}
               onReset={() => {
-                setCandidateName("");
-                setCandidateProfile("");
-                setGeneratedResponse("");
+                setCandidates([]);
                 setCurrentStep(2);
               }}
             />
