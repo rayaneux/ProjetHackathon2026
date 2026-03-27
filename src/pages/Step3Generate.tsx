@@ -36,8 +36,8 @@ export default function Step3Generate({
     const timer3 = setTimeout(() => {
       // Mock des résultats de l'IA pour chaque candidat
       const processed: Candidate[] = candidates.map((c, index) => {
-        // Au lieu de deviner la décision, on utilise celle importée de l'école (c.decision)
         const decision = c.decision;
+        const firstName = c.name.split(' ')[0] || c.name;
         
         if (decision === "accept") {
           return {
@@ -47,7 +47,7 @@ export default function Step3Generate({
               "Les notes et/ou l'expérience démontrent un réel potentiel de réussite dans notre programme.",
               "Motivation et maturité en adéquation avec nos exigences."
             ],
-            aiEmailDraft: `Bonjour ${c.name},\n\nNous avons le grand plaisir de vous annoncer votre admission au sein de notre établissement.\n\nVotre dossier a particulièrement retenu l'attention de notre jury d'admission. Nous avons été très sensibles à votre profil, qui résonne parfaitement avec les valeurs que nous prônons. De plus, les éléments de votre dossier démontrent votre sérieux et votre rigueur.\n\nNous serions ravis de vous compter parmi nos étudiants à la rentrée prochaine. Vous recevrez prochainement les modalités d'inscription définitive.\n\nFélicitations et à très bientôt,\n\nCordialement,\nLe Service des Admissions.`
+            aiEmailDraft: `Bonjour ${firstName},\n\nNous avons le grand plaisir de vous annoncer votre admission au sein de notre établissement pour la prochaine rentrée.\n\nVotre dossier a particulièrement retenu l'attention de notre jury. Les éléments que vous avez mis en avant ("${c.profileData.substring(0, 50)}...") démontrent un profil tout à fait en phase avec l'exigence et les valeurs de notre école. Nous sommes convaincus que vous pourrez pleinement vous épanouir dans ce cursus.\n\nVous recevrez prochainement un email contenant les modalités d'inscription définitive.\n\nFélicitations pour cette admission, et au plaisir de vous compter parmi nous !\n\nCordialement,\n\nL'équipe des Admissions.`
           };
         } else if (decision === "reject") {
           return {
@@ -56,7 +56,7 @@ export default function Step3Generate({
               "Les résultats académiques ou le profil général ne permettent pas de garantir la réussite dans ce cursus exigeant.",
               "Le dossier est jugé soit trop fragile sur les prérequis, soit en inadéquation avec les attentes du programme.",
             ],
-            aiEmailDraft: `Bonjour ${c.name},\n\nSuite à l'étude attentive de votre dossier de candidature par notre jury d'admission, nous sommes au regret de vous informer que nous ne pouvons pas donner une suite favorable à votre demande.\n\nMalgré l'intérêt de votre parcours, le niveau d'exigence de notre formation et le nombre limité de places nous obligent à une sélection extrêmement rigoureuse. Nous avons estimé que votre profil ne correspondait pas totalement aux prérequis attendus pour cette année.\n\nNous vous remercions de l'intérêt porté à notre établissement et vous souhaitons une excellente continuation dans vos projets futurs.\n\nCordialement,\nLe Service des Admissions.`
+            aiEmailDraft: `Bonjour ${firstName},\n\nSuite à l'étude attentive de votre dossier de candidature par notre jury d'admission, nous sommes au regret de vous informer que nous ne pouvons pas donner une suite favorable à votre demande.\n\nMalgré l'intérêt que nous portons à votre profil (notamment concernant : "${c.profileData.substring(0, 40)}..."), le niveau de notre formation et le nombre limité de places nous obligent à une sélection extrêmement rigoureuse cette année. Au vu de la concurrence, d'autres candidatures correspondaient plus précisément à nos prérequis immédiats.\n\nNous vous remercions de l'intérêt porté à notre établissement et vous souhaitons une excellente continuation dans vos futurs projets académiques et professionnels.\n\nCordialement,\n\nL'équipe des Admissions.`
           };
         } else {
           // waitlist ou unknown
@@ -67,7 +67,7 @@ export default function Step3Generate({
               "Candidature placée sur liste d'attente dans l'éventualité de désistements.",
               "Certaines lacunes mineures justifient cette mise en attente par rapport aux dossiers prioritaires."
             ],
-            aiEmailDraft: `Bonjour ${c.name},\n\nNous vous remercions pour l'intérêt que vous portez à notre établissement.\n\nAprès examen approfondi de votre dossier, le jury d'admission a décidé de vous placer sur liste d'attente. Votre profil possède des qualités indéniables, mais le nombre très limité de places ne nous permet pas de vous formuler une offre d'admission directe à ce stade.\n\nNous vous tiendrons informé(e) de l'évolution de votre situation dès que des places se libèreront.\n\nCordialement,\nLe Service des Admissions.`
+            aiEmailDraft: `Bonjour ${firstName},\n\nNous vous remercions pour l'intérêt que vous portez à notre établissement.\n\nAprès examen approfondi de votre dossier, le jury d'admission a statué en faveur d'une mise sur liste d'attente. Vos qualités sont indéniables, cependant le nombre restreint de places ("${c.profileData.substring(0, 30)}...") ne nous permet pas de vous formuler une offre d'admission ferme aujourd'hui.\n\nSoyez assuré(e) que nous vous tiendrons informé(e) très rapidement dès qu'un désistement nous permettra de faire évoluer votre situation.\n\nMerci de votre patience.\n\nCordialement,\n\nL'équipe des Admissions.`
           };
         }
       });
