@@ -17,7 +17,7 @@ function App() {
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="bg-white border-b border-slate-200 py-4 px-6 flex items-center justify-between">
         <h1 className="text-xl font-bold tracking-tight">Plateforme d'Admission IA</h1>
         <div className="text-sm text-slate-500">Prototype Hackathon</div>
