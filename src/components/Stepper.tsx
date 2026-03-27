@@ -39,7 +39,7 @@ export function Stepper({ currentStep }: StepperProps) {
 
               <div
                 className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 bg-white transition-colors duration-300",
+                  "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 bg-white transition-colors duration-300 leading-none pt-0.5",
                   isCompleted
                     ? "border-slate-900 bg-slate-900 text-white"
                     : isCurrent
@@ -47,7 +47,7 @@ export function Stepper({ currentStep }: StepperProps) {
                     : "border-slate-200 text-slate-400"
                 )}
               >
-                {isCompleted ? <Check className="w-5 h-5" /> : step.num}
+                {isCompleted ? <Check className="w-5 h-5 -mt-0.5" /> : step.num}
               </div>
               <span
                 className={cn(
