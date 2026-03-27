@@ -1,16 +1,65 @@
-export default function Step2Candidate() {
+import { Button } from "../components/ui/button"
+import { Input } from "../components/ui/input"
+import { Textarea } from "../components/ui/textarea"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
+import { Label } from "../components/ui/label"
+
+interface Props {
+  candidateName: string;
+  setCandidateName: (val: string) => void;
+  candidateProfile: string;
+  setCandidateProfile: (val: string) => void;
+  onNext: () => void;
+  onPrev: () => void;
+}
+
+export default function Step2Candidate({ 
+  candidateName, 
+  setCandidateName, 
+  candidateProfile, 
+  setCandidateProfile, 
+  onNext, 
+  onPrev 
+}: Props) {
+  const isFormValid = candidateName.trim().length > 0 && candidateProfile.trim().length > 0;
+
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-slate-100 mt-8">
-      <h2 className="text-2xl font-bold text-slate-900 mb-4">Étape 2 : Dossier Candidat</h2>
-      <p className="text-slate-500 mb-8">
-        Importez ou saisissez les informations du candidat.
-        (En attente d'implémentation)
-      </p>
-      
-      <div className="h-48 border-2 border-dashed border-slate-200 rounded-lg flex flex-col items-center justify-center text-slate-400">
-        <p>Zone d'upload ou de saisie du profil candidat</p>
-        <p className="text-sm mt-2">(à venir)</p>
-      </div>
-    </div>
+    <Card className="max-w-3xl mx-auto shadow-sm">
+      <CardHeader>
+        <CardTitle className="text-2xl">Étape 2 : Dossier Candidat</CardTitle>
+        <CardDescription>
+          Saisissez les informations du candidat. Dans la version finale, cela pourrait être l'upload d'un CV ou d'une lettre de motivation.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="name">Nom du candidat</Label>
+          <Input 
+            id="name"
+            placeholder="Ex: Jean Dupont"
+            value={candidateName}
+            onChange={(e) => setCandidateName(e.target.value)}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="profile">Profil / Lettre de motivation (Texte brut)</Label>
+          <Textarea 
+            id="profile"
+            placeholder="Copiez-collez ici le parcours, les notes, ou la lettre de motivation du candidat..."
+            className="min-h-[150px]"
+            value={candidateProfile}
+            onChange={(e) => setCandidateProfile(e.target.value)}
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline" onClick={onPrev} className="bg-slate-100 text-slate-800 hover:bg-slate-200 border-none">
+          Retour
+        </Button>
+        <Button onClick={onNext} disabled={!isFormValid}>
+          Générer la réponse
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

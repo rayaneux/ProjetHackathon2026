@@ -1,27 +1,72 @@
+import { useState } from 'react'
 import { Stepper } from './components/Stepper'
 import Step1Criteria from './pages/Step1Criteria'
-// import Step2Candidate from './pages/Step2Candidate'
-// import Step3Generate from './pages/Step3Generate'
-// import Step4Response from './pages/Step4Response'
+import Step2Candidate from './pages/Step2Candidate'
+import Step3Generate from './pages/Step3Generate'
+import Step4Response from './pages/Step4Response'
 
 function App() {
-  // @TODO Claude Code (LLM 2) : 
-  // Gérer la logique de navigation et d'état entre les étapes (currentStep)
-  // en utilisant un router (react-router-dom) ou un simple state.
-  const mockCurrentStep = 1;
+  const [currentStep, setCurrentStep] = useState(1);
+  
+  // App State
+  const [schoolCriteria, setSchoolCriteria] = useState("");
+  const [candidateName, setCandidateName] = useState("");
+  const [candidateProfile, setCandidateProfile] = useState("");
+  const [generatedResponse, setGeneratedResponse] = useState("");
+
+  const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, 4));
+  const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      <header className="bg-white border-b border-slate-200 py-4 px-6">
+      <header className="bg-white border-b border-slate-200 py-4 px-6 flex items-center justify-between">
         <h1 className="text-xl font-bold tracking-tight">Plateforme d'Admission IA</h1>
+        <div className="text-sm text-slate-500">Prototype Hackathon</div>
       </header>
 
       <main className="max-w-5xl mx-auto px-4 py-8">
-        <Stepper currentStep={mockCurrentStep} />
+        <Stepper currentStep={currentStep} />
         
         <div className="mt-8">
-          {/* L'affichage conditionnel des composants pages est laissé à l'autre LLM */}
-          <Step1Criteria />
+          {currentStep === 1 && (
+            <Step1Criteria 
+              schoolCriteria={schoolCriteria}
+              setSchoolCriteria={setSchoolCriteria}
+              onNext={nextStep}
+            />
+          )}
+          {currentStep === 2 && (
+            <Step2Candidate 
+              candidateName={candidateName}
+              setCandidateName={setCandidateName}
+              candidateProfile={candidateProfile}
+              setCandidateProfile={setCandidateProfile}
+              onNext={nextStep}
+              onPrev={prevStep}
+            />
+          )}
+          {currentStep === 3 && (
+            <Step3Generate 
+              schoolCriteria={schoolCriteria}
+              candidateName={candidateName}
+              candidateProfile={candidateProfile}
+              setGeneratedResponse={setGeneratedResponse}
+              onNext={nextStep}
+            />
+          )}
+          {currentStep === 4 && (
+            <Step4Response 
+              generatedResponse={generatedResponse}
+              setGeneratedResponse={setGeneratedResponse}
+              onPrev={prevStep}
+              onReset={() => {
+                setCandidateName("");
+                setCandidateProfile("");
+                setGeneratedResponse("");
+                setCurrentStep(2);
+              }}
+            />
+          )}
         </div>
       </main>
     </div>

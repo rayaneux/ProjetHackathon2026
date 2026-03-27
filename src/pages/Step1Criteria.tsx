@@ -1,15 +1,42 @@
-export default function Step1Criteria() {
+import { Button } from "../components/ui/button"
+import { Textarea } from "../components/ui/textarea"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
+import { Label } from "../components/ui/label"
+
+interface Props {
+  schoolCriteria: string;
+  setSchoolCriteria: (val: string) => void;
+  onNext: () => void;
+}
+
+export default function Step1Criteria({ schoolCriteria, setSchoolCriteria, onNext }: Props) {
+  const isFormValid = schoolCriteria.trim().length > 0;
+
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-sm border border-slate-100 mt-8">
-      <h2 className="text-2xl font-bold text-slate-900 mb-4">Étape 1 : Critères de l'École</h2>
-      <p className="text-slate-500 mb-8">
-        Configurez ici les critères de sélection et les valeurs de votre école.
-        (En attente d'implémentation)
-      </p>
-      
-      <div className="h-48 border-2 border-dashed border-slate-200 rounded-lg flex items-center justify-center text-slate-400">
-        Zone de formulaire (à venir)
-      </div>
-    </div>
+    <Card className="max-w-3xl mx-auto shadow-sm">
+      <CardHeader>
+        <CardTitle className="text-2xl">Étape 1 : Critères de l'École</CardTitle>
+        <CardDescription>
+          Configurez ici les critères de sélection, l'ADN de votre école et le ton souhaité pour vos réponses.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="criteria">Critères & Ton (Prompt Système)</Label>
+          <Textarea 
+            id="criteria"
+            placeholder="Ex: Nous cherchons des candidats créatifs, autonomes et passionnés par l'innovation. Le ton de la réponse doit être encourageant mais professionnel..."
+            className="min-h-[150px]"
+            value={schoolCriteria}
+            onChange={(e) => setSchoolCriteria(e.target.value)}
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-end">
+        <Button onClick={onNext} disabled={!isFormValid}>
+          Enregistrer & Continuer
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
