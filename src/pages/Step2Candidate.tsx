@@ -1,7 +1,9 @@
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
 import { UploadCloud, FileSpreadsheet, Trash2, Users } from "lucide-react"
-import { Candidate } from "../types"
+import type { Candidate } from "../types"
+import { useRef, useState } from "react"
+import Papa from "papaparse"
 
 interface Props {
   candidates: Candidate[];
@@ -12,9 +14,34 @@ interface Props {
 
 export default function Step2Candidate({ candidates, setCandidates, onNext, onPrev }: Props) {
   const hasCandidates = candidates.length > 0;
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [fileName, setFileName] = useState<string>("");
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setFileName(file.name);
+
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const parsedData = results.data as any[];
+        const mappedCandidates: Candidate[] = parsedData.map((row, index) => ({
+          id: `imported-${index}`,
+          // On essaie de récupérer différentes clés possibles
+          name: row.Nom || row.name || row.Name || "Inconnu",
+          email: row.Email || row.email || "Inconnu",
+          profileData: row.Dossier_Profil || row.dossier || row.profile || JSON.stringify(row),
+        }));
+        
+        setCandidates(mappedCandidates);
+      }
+    });
+  };
 
   const handleSimulateUpload = () => {
-    // Fausse donnée pour simuler l'import d'un tableau de candidats
     const mockData: Candidate[] = [
       {
         id: "1",
@@ -22,29 +49,17 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
         email: "lea.martin@email.com",
         profileData: "Bac S mention Très Bien. Projet associatif fort en écologie. Lettre de motivation très structurée et claire.",
       },
-      {
-        id: "2",
-        name: "Thomas Dubois",
-        email: "thomas.d@email.com",
-        profileData: "Bac ES mention Assez Bien. Notes moyennes en mathématiques. Activité sportive (tennis) niveau régional.",
-      },
-      {
-        id: "3",
-        name: "Sarah Connor",
-        email: "sarah.c@email.com",
-        profileData: "Reconversion professionnelle. 5 ans d'expérience en marketing. Très motivée par le digital, auto-formation en cours.",
-      },
-      {
-        id: "4",
-        name: "Lucas Bernard",
-        email: "lucas.b@email.com",
-        profileData: "Bac STI2D. Passionné d'informatique. Excellentes notes en projet technique, difficultés importantes en anglais et français.",
-      }
+      // ... autres mock data
     ];
+    setFileName("candidats_mock.csv");
     setCandidates(mockData);
   };
 
-  const clearCandidates = () => setCandidates([]);
+  const clearCandidates = () => {
+    setCandidates([]);
+    setFileName("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   return (
     <Card className="max-w-4xl mx-auto shadow-sm">
@@ -59,16 +74,26 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
         {!hasCandidates ? (
           <div 
             className="border-2 border-dashed border-slate-300 rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-50 transition-colors"
-            onClick={handleSimulateUpload}
+            onClick={() => fileInputRef.current?.click()}
           >
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              className="hidden" 
+              accept=".csv"
+              onChange={handleFileUpload}
+            />
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4">
               <UploadCloud className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-1">Cliquez pour importer (Simulation)</h3>
+            <h3 className="text-lg font-semibold text-slate-900 mb-1">Cliquez pour importer votre fichier CSV</h3>
             <p className="text-slate-500 max-w-sm mb-4">
-              Formats supportés: CSV, Excel (.xlsx). Le fichier doit contenir les colonnes: Nom, Email, Dossier/Profil.
+              Le fichier CSV doit idéalement contenir les colonnes : Nom, Email, Dossier_Profil.
             </p>
-            <Button variant="outline">Parcourir les fichiers</Button>
+            <div className="flex gap-4 mt-2">
+              <Button variant="outline">Parcourir les fichiers</Button>
+              <Button variant="secondary" onClick={(e) => { e.stopPropagation(); handleSimulateUpload(); }}>Utiliser données test</Button>
+            </div>
           </div>
         ) : (
           <div className="space-y-4">
@@ -76,7 +101,7 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
               <div className="flex items-center space-x-3">
                 <FileSpreadsheet className="w-6 h-6 text-green-600" />
                 <div>
-                  <p className="font-semibold text-slate-900">candidats_import.csv</p>
+                  <p className="font-semibold text-slate-900">{fileName || "import_candidats.csv"}</p>
                   <p className="text-xs text-slate-500">{candidates.length} candidats importés avec succès</p>
                 </div>
               </div>
@@ -85,9 +110,9 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
               </Button>
             </div>
 
-            <div className="border border-slate-200 rounded-lg overflow-hidden">
+            <div className="border border-slate-200 rounded-lg overflow-hidden max-h-64 overflow-y-auto">
               <table className="w-full text-sm text-left">
-                <thead className="bg-slate-50 text-slate-600 uppercase font-semibold border-b border-slate-200">
+                <thead className="bg-slate-50 text-slate-600 uppercase font-semibold border-b border-slate-200 sticky top-0">
                   <tr>
                     <th className="px-4 py-3">Nom</th>
                     <th className="px-4 py-3">Email</th>
@@ -97,9 +122,9 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
                 <tbody className="divide-y divide-slate-100">
                   {candidates.map((c) => (
                     <tr key={c.id} className="hover:bg-slate-50">
-                      <td className="px-4 py-3 font-medium text-slate-900">{c.name}</td>
-                      <td className="px-4 py-3 text-slate-500">{c.email}</td>
-                      <td className="px-4 py-3 text-slate-500 truncate max-w-xs">{c.profileData}</td>
+                      <td className="px-4 py-3 font-medium text-slate-900 whitespace-nowrap">{c.name}</td>
+                      <td className="px-4 py-3 text-slate-500 whitespace-nowrap">{c.email}</td>
+                      <td className="px-4 py-3 text-slate-500 truncate max-w-xs" title={c.profileData}>{c.profileData}</td>
                     </tr>
                   ))}
                 </tbody>

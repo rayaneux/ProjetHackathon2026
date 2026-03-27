@@ -4,7 +4,7 @@ import Step1Criteria from './pages/Step1Criteria'
 import Step2Candidate from './pages/Step2Candidate'
 import Step3Generate from './pages/Step3Generate'
 import Step4Response from './pages/Step4Response'
-import { Candidate } from './types'
+import type { Candidate } from './types'
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);

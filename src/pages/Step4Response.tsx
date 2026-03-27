@@ -3,7 +3,7 @@ import { Textarea } from "../components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { CheckCircle2, XCircle, Clock, ChevronRight, Check } from "lucide-react"
 import { useState } from "react"
-import { Candidate } from "../types"
+import type { Candidate } from "../types"
 
 interface Props {
   candidates: Candidate[];
