@@ -102,8 +102,8 @@ export default function Step4Response({
       {/* Pop-up Modale */}
       {selectedCandidate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl animate-in fade-in zoom-in duration-200">
-            <CardHeader className="pb-4 border-b border-slate-100 relative">
+          <Card className="w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl bg-white overflow-hidden animate-in fade-in zoom-in duration-200">
+            <CardHeader className="pb-4 border-b border-slate-100 bg-white relative z-10">
               <button 
                 onClick={() => setSelectedCandidateId(null)}
                 className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 p-1.5 rounded-full transition-colors"
@@ -121,7 +121,7 @@ export default function Step4Response({
               </div>
             </CardHeader>
             
-            <CardContent className="p-6 overflow-y-auto flex-1 space-y-6">
+            <CardContent className="p-6 overflow-y-auto flex-1 space-y-6 bg-white relative z-0">
               {/* Explication IA */}
               <div className="bg-slate-50 p-4 rounded-lg border border-slate-100">
                 <h4 className="font-semibold text-slate-800 mb-3 flex items-center">
@@ -158,7 +158,7 @@ export default function Step4Response({
             </CardContent>
 
             {/* Actions Pop-up */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50 rounded-b-lg flex justify-between items-center">
+            <div className="p-4 border-t border-slate-100 bg-slate-50 rounded-b-lg flex justify-between items-center relative z-10">
               <span className="text-sm text-slate-500">
                 Statut : {selectedCandidate.userValidation === 'approved' ? '✅ Prêt à l\'envoi' : selectedCandidate.userValidation === 'rejected' ? '❌ Rejeté' : '⏳ En attente de validation'}
               </span>
