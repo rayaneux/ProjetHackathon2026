@@ -146,15 +146,15 @@ export default function Step4Response({
                 </p>
               </div>
 
-              {/* Editeur d'email */}
-              <div className="space-y-2">
-                <h4 className="font-semibold text-slate-800 text-sm">Brouillon d'email à envoyer</h4>
-                <Textarea 
-                  className="min-h-[180px] text-sm leading-relaxed font-serif text-slate-800"
-                  value={selectedCandidate.aiEmailDraft}
-                  onChange={(e) => updateCandidateEmail(selectedCandidate.id, e.target.value)}
-                />
-              </div>
+                {/* Editeur d'email */}
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-slate-800 text-sm">Brouillon d'email à envoyer</h4>
+                  <Textarea 
+                    className="min-h-[180px] text-sm leading-relaxed font-sans text-slate-800"
+                    value={selectedCandidate.aiEmailDraft}
+                    onChange={(e) => updateCandidateEmail(selectedCandidate.id, e.target.value)}
+                  />
+                </div>
             </CardContent>
 
             {/* Actions Pop-up */}

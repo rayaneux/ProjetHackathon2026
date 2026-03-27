@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['"helvetica-neue-world"', 'sans-serif'],
         serif: ['"pollen-web"', 'serif'],
       },
       colors: {
