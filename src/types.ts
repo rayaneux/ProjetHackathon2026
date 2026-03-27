@@ -6,7 +6,6 @@ export type Candidate = {
   
   // Champs générés par l'IA
   aiDecision?: "accept" | "reject" | "waitlist";
-  aiScore?: number;
   aiExplanation?: string[];
   aiEmailDraft?: string;
   

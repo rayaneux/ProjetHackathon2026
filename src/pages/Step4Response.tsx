@@ -72,13 +72,8 @@ export default function Step4Response({
                 >
                   <div className="flex justify-between items-start mb-2">
                     <div className="font-semibold text-slate-900">{c.name}</div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
-                        {c.aiScore}/100
-                      </span>
-                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mt-2">
                     {getDecisionBadge(c.aiDecision)}
                     
                     {c.userValidation === 'approved' && <span className="text-xs text-green-600 font-medium flex items-center"><Check className="w-3 h-3 mr-1"/> Validé</span>}
@@ -101,7 +96,6 @@ export default function Step4Response({
                     <CardDescription className="mt-1">{selectedCandidate.email}</CardDescription>
                   </div>
                   <div className="flex flex-col items-end">
-                    <div className="text-3xl font-black text-slate-800">{selectedCandidate.aiScore}<span className="text-lg text-slate-400 font-normal">/100</span></div>
                     {getDecisionBadge(selectedCandidate.aiDecision)}
                   </div>
                 </div>
