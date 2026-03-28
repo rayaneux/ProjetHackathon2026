@@ -44,7 +44,7 @@ export default function Dashboard({ campaigns, forms, onCreateNew, onSelectCampa
   const columns: { id: Campaign['status'], title: string, color: string }[] = [
     { id: 'upcoming', title: 'Pas encore ouvert', color: 'bg-slate-100/80 border-slate-200' },
     { id: 'active', title: 'Ouvert', color: 'bg-blue-50/50 border-blue-100' },
-    { id: 'closed', title: 'Fini', color: 'bg-green-50/50 border-green-100' },
+    { id: 'closed', title: 'Complété', color: 'bg-green-50/50 border-green-100' },
   ];
 
   const handleDragStart = (e: React.DragEvent, id: string) => {
@@ -124,7 +124,7 @@ export default function Dashboard({ campaigns, forms, onCreateNew, onSelectCampa
                     } else if (camp.status === 'active') {
                       statusBadge = <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 border border-blue-200 uppercase tracking-wider">Ouvert</span>;
                     } else {
-                      statusBadge = <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-green-50 text-green-600 border border-green-200 uppercase tracking-wider">Fini</span>;
+                      statusBadge = <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-green-50 text-green-600 border border-green-200 uppercase tracking-wider">Complété</span>;
                     }
 
                     return (

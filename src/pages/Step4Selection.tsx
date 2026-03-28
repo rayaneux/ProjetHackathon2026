@@ -134,14 +134,16 @@ Master Management de l'Innovation
           {
             to_name: candidate.name,
             to_email: candidate.email,
+            subject: "Votre admission au Master Management de l'Innovation — 2025-2026",
             message: htmlMessage,
-            reply_to: "gadwstudio@gmail.com"
+            reply_to: "admissions@isi-paris.fr"
           },
           PUBLIC_KEY
         );
-        console.log("Email d'admission (Effet Wow) envoyé à", candidate.email);
+        showToast(`Email d'admission envoyé à ${candidate.email}`, "success");
       } catch (e) {
         console.error("Erreur lors de l'envoi de l'email wow", e);
+        showToast("Erreur lors de l'envoi de l'email", "error");
       }
     }
 

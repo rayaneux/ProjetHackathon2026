@@ -514,12 +514,21 @@ function App() {
                 />
               )}
               {currentStep === 6 && (
-                <Step6Bilan 
+                <Step6Bilan
                   candidates={candidates}
                   schoolCriteria={schoolCriteria}
+                  onComplete={() => {
+                    if (activeCampaignId) {
+                      setCampaigns(prev => prev.map(c =>
+                        c.id === activeCampaignId ? { ...c, status: "closed" as const } : c
+                      ));
+                    }
+                    handleBackToDashboard();
+                    setCurrentStep(1);
+                  }}
                   onReset={() => {
                     handleBackToDashboard();
-                    setCurrentStep(1); // Reset step for next campaign
+                    setCurrentStep(1);
                   }}
                 />
               )}
