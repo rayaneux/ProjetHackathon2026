@@ -32,7 +32,7 @@ export default function Step4Response({
     // Remplacer ces valeurs par celles de ton compte EmailJS !
     const SERVICE_ID = "service_ry8qdnr";
     const TEMPLATE_ID = "template_ud9775f";
-    const PUBLIC_KEY = "GgCpyEheha_SAQw9rWorE";
+    const PUBLIC_KEY = "Rr9hfefYgp0HXZ2yw";
 
     try {
       // On envoie un email pour chaque candidat approuvé
