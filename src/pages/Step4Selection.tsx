@@ -90,48 +90,98 @@ export default function Step4Selection({ candidates, setCandidates, capacity, on
       const PUBLIC_KEY = "Rr9hfefYgp0HXZ2yw";
 
       const htmlMessage = `
-<p>Bonjour Léa,</p>
+<p style="font-size:15px;color:#1e293b;">Bonjour Léa,</p>
 
-<p>C'est avec un réel enthousiasme que nous vous confirmons votre <strong>admission au Master Management de l'Innovation</strong> — session 2025-2026.</p>
+<p style="font-size:15px;color:#1e293b;">Nous avons le plaisir de vous confirmer votre <strong>admission au Master Management de l'Innovation — session 2025-2026</strong>.</p>
 
-<p>Votre dossier s'est distingué parmi les 847 candidatures reçues cette année. Voici précisément pourquoi.</p>
+<p style="font-size:15px;color:#1e293b;">Cette décision n'a pas été prise à la légère. Parmi les <strong>847 candidatures</strong> reçues cette année — un record — votre dossier a fait l'objet d'une discussion approfondie en jury. Ce message a pour vocation de vous donner une lecture honnête et complète de ce qui a emporté notre décision, et de vous préparer au mieux pour la rentrée.</p>
 
-<hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+<hr style="border:none;border-top:2px solid #e2e8f0;margin:28px 0"/>
 
-<p><strong>Ce qui a fait la différence dans votre profil</strong></p>
+<p style="font-size:16px;font-weight:700;color:#0f172a;">✦ Analyse de votre dossier — ce que le jury a retenu</p>
 
-<p>Votre stage de 3 mois chez <strong>L'Oréal</strong> en tant qu'Assistant Chef de Produit a été déterminant. Conduire une analyse concurrentielle sur les cosmétiques éco-responsables et participer à une stratégie marketing digitale à ce stade de votre parcours est rare — et directement aligné avec l'orientation durable de notre programme.</p>
+<p style="font-size:14px;color:#475569;font-style:italic;">Chaque point ci-dessous correspond à un critère d'évaluation explicite de notre grille de sélection.</p>
 
-<p>Votre rôle de <strong>Trésorier du BDE</strong> — gestion autonome d'un budget de 15 000 € et organisation d'événements pour 500 personnes — témoigne d'une maturité opérationnelle et d'un sens des responsabilités que nous recherchons dans chaque promotion. La rigueur financière que vous avez démontrée est un signal fort.</p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>① Expérience professionnelle — L'Oréal (Assistant Chef de Produit, 3 mois)</strong><br/>
+C'est l'élément le plus distinctif de votre candidature. Non pas parce que L'Oréal est un grand groupe — mais parce que vous avez conduit une <em>analyse concurrentielle autonome sur les cosmétiques éco-responsables</em> dans un secteur en pleine disruption réglementaire (directive CSRD, normes EU Green Deal). À ce stade du cursus, c'est une exposition à la complexité stratégique que peu de candidats ont eue. Le jury a noté que vous avez su relier une tendance macro (durabilité) à des décisions opérationnelles (reformulation produit, repositionnement prix) — c'est exactement le raisonnement que nous formons.</p>
 
-<p>Votre <strong>TOEIC 910/990</strong> et votre niveau B2 en espagnol sont des atouts concrets dans un programme qui intègre des partenariats avec des entreprises européennes et des modules dispensés en anglais.</p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>② Engagement associatif — Trésorier BDE, budget 15 000 €</strong><br/>
+Gérer un budget de 15 000 € et coordonner des événements pour 500 personnes n'est pas une ligne de CV ordinaire. Ce que le jury a apprécié, c'est la <em>responsabilité financière réelle</em> que vous avez assumée : trésorerie, fournisseurs, arbitrages budgétaires en temps réel. Cela révèle une capacité à prendre des décisions sous contrainte — compétence que les cours seuls ne peuvent pas enseigner. Plusieurs membres du jury ont commenté que votre posture de "trésorier actif" (et non représentatif) était perceptible dans la façon dont vous l'avez décrit.</p>
 
-<p>Votre lettre de motivation a également retenu notre attention : votre connaissance du module <em>"Green Business Models"</em> et votre capacité à articuler performance économique et impact environnemental montrent que vous avez compris ce qui distingue notre programme.</p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>③ Compétences linguistiques — TOEIC 910/990 + espagnol B2</strong><br/>
+Deux tiers de nos intervenants extérieurs sont anglophones (McKinsey, BCG, Unilever Europe). Trois modules de S2 sont dispensés intégralement en anglais. Votre score TOEIC vous place dans le premier quartile des candidats admis cette année — vous n'aurez pas à dépenser d'énergie sur la langue, vous pourrez vous concentrer sur le fond. Le B2 en espagnol est un plus non négligeable : nous développons un partenariat avec ESADE Barcelona pour un module commun à partir de 2026.</p>
 
-<hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>④ Lettre de motivation — cohérence et profondeur</strong><br/>
+Votre lettre a marqué par sa précision. Vous citez le module <em>"Green Business Models"</em> non pas comme un argument marketing, mais en expliquant comment il s'articule avec votre projet professionnel (conseil en stratégie RSE). Le jury est habitué aux lettres génériques — la vôtre prouvait que vous aviez lu notre programme en détail et que votre intérêt était authentique. C'est rare, et ça compte.</p>
 
-<p><strong>Nos recommandations avant la rentrée</strong></p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>⑤ Cohérence globale du projet</strong><br/>
+L'expérience L'Oréal + l'engagement BDE + la lettre forment un projet lisible et cohérent. Le jury peut voir où vous allez. Beaucoup de candidats ont de bons éléments épars — vous, vous avez une trajectoire.</p>
 
-<p>Pour aborder le programme dans les meilleures conditions, nous vous suggérons de renforcer deux domaines avant septembre :</p>
+<hr style="border:none;border-top:2px solid #e2e8f0;margin:28px 0"/>
 
-<p>→ <strong>Comptabilité de gestion</strong> — Ce module est central dans notre cours "Business Modelling & Finance d'entreprise" (S1). Nous vous recommandons le MOOC <em>"Comptabilité pour non-comptables"</em> de HEC sur Coursera (gratuit, ~8h), ou l'ouvrage de référence de Claude Alazard. Objectif : maîtriser les notions de coûts complets, marges et seuil de rentabilité.</p>
+<p style="font-size:16px;font-weight:700;color:#0f172a;">✦ Axes de progression — pour aborder le programme dans les meilleures conditions</p>
 
-<p>→ <strong>Droit des affaires</strong> — Votre futur rôle de manager vous exposera régulièrement aux enjeux contractuels, de propriété intellectuelle et de réglementation sectorielle. Une initiation via le MOOC <em>"Droit des entreprises"</em> de l'Université Paris 2 (Coursera) couvrira l'essentiel en 6h.</p>
+<p style="font-size:14px;color:#475569;font-style:italic;">Ces recommandations sont constructives, non éliminatoires. Votre admission est ferme. Ce sont des investissements pour que votre rentrée soit plus sereine.</p>
 
-<p>Ces points ne remettent nullement en question votre admission — ils définissent votre trajectoire de progression pour les premiers mois.</p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>① Comptabilité de gestion — priorité haute</strong><br/>
+Le module "Business Modelling & Finance d'entreprise" (Semestre 1, obligatoire) présuppose une maîtrise des notions de coûts complets, marges sur coûts variables et seuil de rentabilité. Votre parcours marketing n'a pas nécessairement couvert ces bases en profondeur — et c'est normal.<br/><br/>
+<em>Ce que nous vous recommandons :</em><br/>
+— MOOC "Comptabilité de gestion" de l'Université Paris-Dauphine sur FUN-MOOC (gratuit, 10h, niveau accessible)<br/>
+— Ouvrage : <em>Contrôle de gestion</em>, Claude Alazard & Sabine Sépari — Chapitres 1 à 4 suffisent<br/>
+— Objectif minimal : savoir lire un compte de résultat différentiel et calculer un point mort<br/><br/>
+Si vous investissez 2h/semaine jusqu'en septembre, vous arriverez à niveau.</p>
 
-<hr style="border:none;border-top:1px solid #e2e8f0;margin:20px 0"/>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>② Droit des affaires — priorité moyenne</strong><br/>
+Votre futur rôle de manager vous confrontera à des questions contractuelles, de propriété intellectuelle et de conformité réglementaire (particulièrement dans la durabilité : CSRD, taxonomie verte). Une base juridique vous rendra plus crédible face aux équipes légales et aux clients.<br/><br/>
+<em>Ce que nous vous recommandons :</em><br/>
+— MOOC "Introduction au droit des entreprises", Université Paris 2 Panthéon-Assas sur Coursera (6h, gratuit en audit)<br/>
+— Focus sur : contrats commerciaux, responsabilité du dirigeant, notions de droit de la concurrence<br/>
+— Pas besoin d'aller plus loin : notre cours de S2 couvrira les spécificités sectorielles</p>
 
-<p><strong>Prochaines étapes</strong></p>
-<p>• Confirmation de votre inscription : avant le <strong>15 juillet 2025</strong><br/>
-• Réunion de pré-rentrée (en présentiel) : <strong>1er septembre 2025</strong><br/>
-• Livret de préparation pédagogique : envoi dans les <strong>15 prochains jours</strong></p>
+<p style="font-size:15px;color:#1e293b;margin-top:16px;"><strong>③ Excel / modélisation financière — priorité complémentaire</strong><br/>
+Si votre maîtrise d'Excel se limite aux usages courants (tableaux, formules simples), un effort de mise à niveau sera utile. Le module Business Modelling utilise des modèles multi-scénarios avec TCD, INDEX/EQUIV et des bases de simulation Monte Carlo.<br/><br/>
+<em>Ressource :</em> la série "Excel for Business" de Macquarie University sur Coursera (auditable gratuitement) couvre l'essentiel en 15h.</p>
 
-<p>Nous avons hâte de vous accueillir. Votre parcours — entre rigueur académique, engagement associatif et expérience terrain chez un grand groupe — est exactement le profil que nous cherchons à intégrer à notre écosystème.</p>
+<hr style="border:none;border-top:2px solid #e2e8f0;margin:28px 0"/>
 
-<p>Bienvenue dans la communauté.</p>
+<p style="font-size:16px;font-weight:700;color:#0f172a;">✦ Prochaines étapes — ce que vous devez faire</p>
 
-<p><em>L'équipe des admissions<br/>Master Management de l'Innovation</em></p>
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#1e293b;">
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 8px;font-weight:600;">📌 Confirmation d'inscription</td>
+    <td style="padding:10px 8px;">Avant le <strong>15 juillet 2025</strong> — lien dans le portail admissions</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 8px;font-weight:600;">📘 Livret pédagogique de préparation</td>
+    <td style="padding:10px 8px;">Envoi sous <strong>15 jours</strong> — contient le syllabus détaillé S1 et la liste de lectures recommandées</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 8px;font-weight:600;">👥 Journée de pré-rentrée (présentiel)</td>
+    <td style="padding:10px 8px;"><strong>1er septembre 2025</strong> — rencontre de la promotion, remise des accès plateforme, présentation des intervenants</td>
+  </tr>
+  <tr style="border-bottom:1px solid #e2e8f0;">
+    <td style="padding:10px 8px;font-weight:600;">📅 Rentrée officielle</td>
+    <td style="padding:10px 8px;"><strong>8 septembre 2025</strong> — premier cours : Stratégie & Positionnement concurrentiel</td>
+  </tr>
+  <tr>
+    <td style="padding:10px 8px;font-weight:600;">💬 Entretien individuel optionnel</td>
+    <td style="padding:10px 8px;">Disponible sur demande avec votre référent pédagogique — répondez à cet email pour planifier</td>
+  </tr>
+</table>
+
+<hr style="border:none;border-top:2px solid #e2e8f0;margin:28px 0"/>
+
+<p style="font-size:15px;color:#1e293b;">Léa, nous terminons chaque année par la même phrase aux candidats admis, et elle est sincère : <strong>nous avons autant à apprendre de vous que vous de nous</strong>. Votre regard extérieur, votre expérience terrain, vos questionnements — ce sont eux qui font vivre le programme.</p>
+
+<p style="font-size:15px;color:#1e293b;">Si vous avez des questions sur le contenu pédagogique, la vie étudiante, les débouchés ou simplement sur ce qui vous attend — répondez directement à cet email. Nous lisons tout.</p>
+
+<p style="font-size:15px;color:#1e293b;">À très bientôt,</p>
+
+<p style="font-size:15px;color:#1e293b;">
+<strong>Claire Beaumont</strong><br/>
+Responsable des Admissions<br/>
+<em>Master Management de l'Innovation — Promotion 2025-2026</em>
+</p>
 `;
 
       try {
