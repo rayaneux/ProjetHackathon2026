@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Toaster, showToast } from './components/Toaster'
 import { Stepper } from './components/Stepper'
 import Step1Criteria from './pages/Step1Criteria'
@@ -24,7 +24,9 @@ function App() {
   });
   const [currentStep, setCurrentStep] = useState(1);
   const [furthestStep, setFurthestStep] = useState(1);
-  
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
   // Data
   const [campaigns, setCampaigns] = useState<Campaign[]>(() => {
     try {
@@ -330,6 +332,16 @@ function App() {
   };
 
 
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setShowUserMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   if (currentView === "school_landing") {
     return <SchoolLanding onApply={handleNewApplication} />;
   }
@@ -398,6 +410,34 @@ function App() {
           </div>
           <div className="w-px h-4 bg-slate-200" />
           <span className="flex items-center"><div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></div>Système Prêt</span>
+          <div className="w-px h-4 bg-slate-200" />
+          {/* User avatar + menu */}
+          <div className="relative" ref={userMenuRef}>
+            <button
+              onClick={() => setShowUserMenu(v => !v)}
+              className="w-8 h-8 rounded-full bg-slate-900 text-white text-[11px] font-bold flex items-center justify-center ring-2 ring-white hover:ring-slate-300 transition-all select-none"
+              title="Mon compte"
+            >
+              GA
+            </button>
+            {showUserMenu && (
+              <div className="absolute right-0 top-10 w-52 bg-white border border-slate-200 rounded-xl shadow-xl py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="px-4 py-2.5 border-b border-slate-100">
+                  <p className="text-xs font-semibold text-slate-800">Gauthier A.</p>
+                  <p className="text-[11px] text-slate-400 truncate">gadwstudio@gmail.com</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowUserMenu(false);
+                    setCurrentView("landing");
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 transition-colors font-medium"
+                >
+                  Se déconnecter
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
