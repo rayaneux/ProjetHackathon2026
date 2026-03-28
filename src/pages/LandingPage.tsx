@@ -2,6 +2,8 @@ import { Button } from "../components/ui/button"
 import { ArrowRight, CheckCircle2, Zap, Target, Mail, Quote, Users, ChevronDown } from "lucide-react"
 import { useState } from "react"
 
+const base = import.meta.env.BASE_URL
+
 interface Props {
   onGetStarted: () => void;
 }
@@ -41,7 +43,7 @@ export default function LandingPage({ onGetStarted }: Props) {
       <nav className="fixed top-0 left-0 right-0 bg-[#FFFDF9]/80 backdrop-blur-md z-50 border-b border-orange-900/5">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <img src="/logo.png" alt="Lighthouse Logo" className="h-8 w-auto" />
+            <img src={`${base}logo.png`} alt="Lighthouse Logo" className="h-8 w-auto" />
             <span className="font-sans font-bold text-xl tracking-tight text-slate-900">Lighthouse</span>
           </div>
           <div className="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
@@ -96,7 +98,7 @@ export default function LandingPage({ onGetStarted }: Props) {
           muted
           playsInline
           className="absolute inset-0 w-full h-full object-cover object-right blur-[6px] scale-105"
-          src="/hero.mp4"
+          src={`${base}hero.mp4`}
         />
 
         {/* Subtle left fade so text stays readable */}
@@ -132,10 +134,10 @@ export default function LandingPage({ onGetStarted }: Props) {
               <p className="text-sm text-slate-500 font-medium">Déjà adopté par les meilleures écoles</p>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 {[
-                  { src: "/logos/omnes-education.png",  alt: "Omnes Education" },
-                  { src: "/logos/sciences-po.png",       alt: "Sciences Po", small: true },
-                  { src: "/logos/centrale-supelec.png",  alt: "CentraleSupélec" },
-                  { src: "/logos/hec-paris.png",         alt: "HEC Paris" },
+                  { src: `${base}logos/omnes-education.png`,  alt: "Omnes Education" },
+                  { src: `${base}logos/sciences-po.png`,       alt: "Sciences Po", small: true },
+                  { src: `${base}logos/centrale-supelec.png`,  alt: "CentraleSupélec" },
+                  { src: `${base}logos/hec-paris.png`,         alt: "HEC Paris" },
                 ].map((logo) => (
                   <img
                     key={logo.alt}
@@ -514,21 +516,21 @@ export default function LandingPage({ onGetStarted }: Props) {
                   "On a divisé par trois le temps passé sur le tri des dossiers, sans sacrifier la qualité des retours aux candidats.",
                 author: "Claire Dumont",
                 role: "Responsable admissions — école de commerce",
-                avatar: "/testimonials/avatar-1.png",
+                avatar: `${base}testimonials/avatar-1.png`,
               },
               {
                 quote:
                   "Les refus sont enfin accompagnés d'un message clair et pédagogique. Les candidats nous le disent : c'est plus humain.",
                 author: "Marc Lefèvre",
                 role: "Directeur des études — institut universitaire",
-                avatar: "/testimonials/avatar-2.png",
+                avatar: `${base}testimonials/avatar-2.png`,
               },
               {
                 quote:
                   "La vue par campagne et le classement IA nous ont permis de tenir nos délais de réponse annoncés aux candidats.",
                 author: "Philippe Garnier",
                 role: "Responsable recrutement — formation continue",
-                avatar: "/testimonials/avatar-3.png",
+                avatar: `${base}testimonials/avatar-3.png`,
               },
             ].map((t) => (
               <blockquote
@@ -613,7 +615,7 @@ export default function LandingPage({ onGetStarted }: Props) {
         <footer className="relative border-t border-slate-800/80 py-10 px-4">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center space-x-2">
-              <img src="/logo.png" alt="Lighthouse Logo" className="h-6 w-auto opacity-90 brightness-0 invert" />
+              <img src={`${base}logo.png`} alt="Lighthouse Logo" className="h-6 w-auto opacity-90 brightness-0 invert" />
               <span className="font-sans font-bold text-white">Lighthouse</span>
             </div>
             <p className="text-sm text-slate-400 text-center md:text-left">

@@ -355,7 +355,7 @@ function App() {
             className="flex items-center space-x-3 cursor-pointer group" 
             onClick={handleBackToDashboard}
           >
-            <img src="/logo.png" alt="Lighthouse Logo" className="h-10 w-auto object-contain group-hover:scale-105 transition-transform" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Lighthouse Logo" className="h-10 w-auto object-contain group-hover:scale-105 transition-transform" />
             <h1 className="text-xl font-bold tracking-tight font-serif">Lighthouse</h1>
           </div>
 

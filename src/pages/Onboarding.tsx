@@ -150,7 +150,7 @@ export default function Onboarding({ onComplete }: Props) {
       {/* Header */}
       <div className="px-8 py-5 flex items-center justify-between border-b border-slate-100 bg-white/80 backdrop-blur-md">
         <div className="flex items-center space-x-2.5">
-          <img src="/logo.png" alt="Lighthouse" className="h-8 w-auto" />
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Lighthouse" className="h-8 w-auto" />
           <span className="font-bold text-lg tracking-tight font-serif">Lighthouse</span>
         </div>
         <span className="text-sm text-slate-400 font-medium">Étape {stepIndex + 1} / {STEPS.length}</span>
