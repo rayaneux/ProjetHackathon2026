@@ -135,7 +135,7 @@ export default function Step4Response({
         <Button 
           onClick={handleSendEmails} 
           className="bg-blue-600 hover:bg-blue-700 text-white min-w-[200px]"
-          disabled={pendingCount > 0 || isSending || approvedCandidates.length === 0}
+          disabled={isSending || approvedCandidates.length === 0}
         >
           {isSending ? (
             <span className="flex items-center">Envoi en cours...</span>
