@@ -316,8 +316,7 @@ export default function Dashboard({ campaigns, forms, onCreateNew, onSelectCampa
                                   e.stopPropagation();
                                   const base = import.meta.env.BASE_URL;
                                   const url = `${window.location.origin}${base}?view=school&campaignId=${camp.id}`;
-                                  navigator.clipboard.writeText(url);
-                                  showToast("Lien candidat copié !", "success");
+                                  window.open(url, '_blank');
                                 }}
                                 title="Copier le lien du formulaire candidat"
                                 className="flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-dark hover:bg-slate-100 px-2 py-1 rounded-lg transition-colors"
