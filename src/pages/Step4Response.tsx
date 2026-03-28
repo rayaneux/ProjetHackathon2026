@@ -1,9 +1,10 @@
 import { Button } from "../components/ui/button"
 import { Textarea } from "../components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { CheckCircle2, XCircle, Clock, ChevronRight, Check, X } from "lucide-react"
+import { CheckCircle2, XCircle, Clock, ChevronRight, Check, X, Send } from "lucide-react"
 import { useState } from "react"
 import type { Candidate } from "../types"
+import emailjs from '@emailjs/browser'
 
 interface Props {
   candidates: Candidate[];
@@ -19,9 +20,47 @@ export default function Step4Response({
   onReset
 }: Props) {
   const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
+  const [isSending, setIsSending] = useState(false);
 
   const selectedCandidate = candidates.find(c => c.id === selectedCandidateId);
   const pendingCount = candidates.filter(c => c.userValidation === "pending" || !c.userValidation).length;
+  const approvedCandidates = candidates.filter(c => c.userValidation === "approved");
+
+  const handleSendEmails = async () => {
+    setIsSending(true);
+    
+    // Remplacer ces valeurs par celles de ton compte EmailJS !
+    const SERVICE_ID = "YOUR_SERVICE_ID";
+    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+    try {
+      // On envoie un email pour chaque candidat approuvé
+      for (const candidate of approvedCandidates) {
+        if (!candidate.aiEmailDraft) continue;
+
+        await emailjs.send(
+          SERVICE_ID,
+          TEMPLATE_ID,
+          {
+            to_name: candidate.name,
+            to_email: candidate.email,
+            message: candidate.aiEmailDraft,
+            reply_to: "admissions@lighthouse.edu"
+          },
+          PUBLIC_KEY
+        );
+      }
+      
+      alert(`✅ Succès ! ${approvedCandidates.length} email(s) envoyé(s) avec succès.`);
+      onReset();
+    } catch (error) {
+      console.error("Erreur lors de l'envoi des emails:", error);
+      alert("❌ Une erreur est survenue lors de l'envoi des emails. Vérifiez la console ou vos clés EmailJS.");
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const updateCandidateValidation = (id: string, status: "approved" | "rejected" | "modified") => {
     setCandidates(candidates.map(c => 
@@ -91,11 +130,17 @@ export default function Step4Response({
           Retour aux critères
         </Button>
         <Button 
-          onClick={onReset} 
-          className="bg-blue-600 hover:bg-blue-700 text-white"
-          disabled={pendingCount > 0}
+          onClick={handleSendEmails} 
+          className="bg-blue-600 hover:bg-blue-700 text-white min-w-[200px]"
+          disabled={pendingCount > 0 || isSending || approvedCandidates.length === 0}
         >
-          Terminer et Envoyer les Mails ({candidates.filter(c => c.userValidation === 'approved').length})
+          {isSending ? (
+            <span className="flex items-center">Envoi en cours...</span>
+          ) : (
+            <span className="flex items-center">
+              Terminer et Envoyer les Mails ({approvedCandidates.length}) <Send className="w-4 h-4 ml-2" />
+            </span>
+          )}
         </Button>
       </div>
 
