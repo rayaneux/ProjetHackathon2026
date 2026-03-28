@@ -21,9 +21,9 @@ function App() {
       <header className="bg-white/80 backdrop-blur-md border-b border-border py-4 px-8 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center space-x-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center shadow-inner">
-            <span className="text-white font-serif font-bold text-lg leading-none">A</span>
+            <span className="text-white font-serif font-bold text-lg leading-none">L</span>
           </div>
-          <h1 className="text-xl font-bold tracking-tight font-serif">Admissio<span className="text-muted-foreground font-sans font-normal text-sm ml-1 px-2 py-0.5 bg-muted rounded-full">AI</span></h1>
+          <h1 className="text-xl font-bold tracking-tight font-serif">Lighthouse</h1>
         </div>
         <div className="flex items-center space-x-4 text-[13px] font-medium text-muted-foreground">
           <span className="flex items-center"><div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></div>Système Prêt</span>
