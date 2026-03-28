@@ -39,13 +39,16 @@ export default function Step4Response({
       for (const candidate of approvedCandidates) {
         if (!candidate.aiEmailDraft) continue;
 
+        // On convertit les sauts de ligne texte (\n) en balises HTML (<br/>) pour l'email
+        const htmlMessage = candidate.aiEmailDraft.replace(/\n/g, '<br/>');
+
         await emailjs.send(
           SERVICE_ID,
           TEMPLATE_ID,
           {
             to_name: candidate.name,
             to_email: candidate.email,
-            message: candidate.aiEmailDraft,
+            message: htmlMessage,
             reply_to: "gadwstudio@gmail.com"
           },
           PUBLIC_KEY
