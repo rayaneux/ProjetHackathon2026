@@ -93,7 +93,25 @@ export default function Step5Response({ candidates, setCandidates, onPrev, onNex
               "Le profil présente des lacunes vis-à-vis des prérequis académiques exigés.",
               "Le score de pertinence est insuffisant face au niveau de la concurrence cette année."
             ],
-            aiEmailDraft: `Bonjour ${firstName},\n\nSuite à l'étude attentive de votre dossier de candidature par notre jury, nous sommes au regret de vous informer que nous ne pouvons pas donner une suite favorable à votre demande.\n\n[Bilan Pédagogique]\nNous avons noté des éléments intéressants dans votre parcours ("${(c.profileData || "").substring(0, 40)}..."). Cependant, nos places étant très limitées, d'autres profils répondaient plus directement à nos critères immédiats, notamment en ce qui concerne :\n- ${c.aiAnalysis || "l'adéquation avec le programme"}\n\nNous espérons que ce retour vous aidera dans vos futures candidatures et vous souhaitons une excellente continuation dans vos projets académiques et professionnels.\n\nCordialement,\n\nL'équipe des Admissions.`
+            aiEmailDraft: `<p>Bonjour ${firstName},</p>
+
+<p>Merci d'avoir candidaté au Master Management de l'Innovation. Nous avons étudié votre dossier avec attention et je vous contacte pour vous informer que nous ne pouvons pas vous proposer une place dans la promotion 2025-2026.</p>
+
+<p>Je sais que ce type de message est difficile à recevoir, et je préfère vous en dire un peu plus plutôt que de vous laisser avec une réponse sèche.</p>
+
+<p>Cette année, nous avons reçu 847 candidatures pour 42 places. La sélection a été particulièrement serrée, et certains dossiers n'ont pas été retenus non pas parce qu'ils étaient insuffisants, mais parce que d'autres profils répondaient plus directement aux critères de cette promotion spécifique. Ce n'est pas un jugement sur votre valeur ou votre potentiel.</p>
+
+<p>Les éléments qui ont joué en votre faveur ont bien été identifiés — votre lettre témoignait d'un intérêt sincère pour le programme et votre parcours comporte des aspects solides. Ce qui a manqué, c'est principalement l'expérience terrain en lien direct avec les enjeux du management de l'innovation — qu'il s'agisse de stages, de projets associatifs à responsabilité réelle ou d'une exposition aux dynamiques d'entreprise en transformation.</p>
+
+<p>Si vous envisagez de recandidater l'année prochaine, voici les deux points sur lesquels concentrer votre énergie d'ici là : construire une expérience professionnelle ou associative où vous avez eu une responsabilité mesurable — budget, équipe, livrable — et être en mesure d'expliquer, avec précision, en quoi cette expérience vous a changé dans votre façon de raisonner. C'est ce que le jury cherche au-delà du CV.</p>
+
+<p>La candidature reste ouverte l'année prochaine. Plusieurs membres de notre promotion actuelle n'ont pas été admis du premier coup.</p>
+
+<p>Je vous souhaite sincèrement bonne continuation dans votre parcours.</p>
+
+<p>Claire Beaumont<br/>
+Responsable des Admissions<br/>
+Master Management de l'Innovation</p>`
           };
         }
         return c;
