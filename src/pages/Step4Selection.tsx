@@ -96,11 +96,11 @@ export default function Step4Selection({ candidates, setCandidates, capacity, on
 
 <p>Vous intégrez le Master Management de l'Innovation à la rentrée de septembre.</p>
 
-<p>Je vais être honnête avec vous sur ce qui s'est passé en salle. On a eu 847 candidatures cette année, c'est notre record. Le jury passe en moyenne quatre minutes par dossier. Le vôtre en a pris un peu plus, parce qu'il y avait des choses à discuter — dans le bon sens du terme.</p>
+<p>Je vais vous dire ce qui a retenu l'attention dans votre dossier, parce que je trouve que les candidats méritent de savoir pourquoi ils sont admis — pas juste d'apprendre qu'ils le sont.</p>
 
-<p>Ce qui a vraiment retenu l'attention, c'est votre stage chez L'Oréal. Pas le nom de l'entreprise — ça, tout le monde en a un sur le CV — mais ce que vous en avez fait. Conduire une analyse concurrentielle sur les cosmétiques éco-responsables de façon autonome à ce stade, en comprenant les enjeux réglementaires derrière (la CSRD, le Green Deal), c'est une maturité qu'on ne voit pas souvent. Un membre du jury a dit "elle sait relier une tendance macro à une décision opérationnelle" et c'est exactement ce qu'on essaie d'enseigner ici pendant deux ans. Vous l'avez déjà fait.</p>
+<p>Votre stage chez L'Oréal a compté, mais pas pour les raisons que vous imaginez peut-être. Ce n'est pas le nom de l'entreprise — c'est ce que vous en avez fait. Conduire une analyse concurrentielle sur les cosmétiques éco-responsables de façon autonome, en comprenant les enjeux réglementaires derrière (la CSRD, le Green Deal), c'est une maturité qu'on ne voit pas souvent à ce stade. Savoir relier une tendance macro à une décision opérationnelle, c'est exactement ce qu'on cherche à développer ici. Vous l'avez déjà fait.</p>
 
-<p>Le BDE aussi. Trésorier actif avec 15 000 € sous responsabilité et des événements à 500 personnes, ce n'est pas une ligne de CV qu'on lit en diagonale. Ce qu'on a vu derrière, c'est quelqu'un qui arbitre sous contrainte, qui gère des fournisseurs, qui assume. Plusieurs jurés ont remarqué que vous en parliez avec précision — pas comme une expérience à valoriser, mais comme quelque chose que vous avez vraiment fait. Ça se sent.</p>
+<p>Le BDE aussi. Trésorier actif avec 15 000 € sous responsabilité et des événements à 500 personnes, ce n'est pas une ligne de CV qu'on lit en diagonale. Ce qu'on a vu derrière, c'est quelqu'un qui arbitre sous contrainte, qui gère des fournisseurs, qui assume. Vous en parliez avec précision — pas comme une expérience à valoriser, mais comme quelque chose que vous avez vraiment fait. Ça se sent.</p>
 
 <p>Votre TOEIC à 910 vous met dans le premier quart de la promotion — les modules en anglais du S2 ne seront pas un obstacle pour vous, vous pourrez vous concentrer sur le fond. Et le B2 en espagnol tombe bien : on est en train de monter un module commun avec ESADE Barcelona, vous serez dans les premières promos à en bénéficier.</p>
 
