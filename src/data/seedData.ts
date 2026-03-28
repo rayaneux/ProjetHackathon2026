@@ -154,7 +154,7 @@ const LEA_MARTIN: Candidate = {
 }
 
 // ─── Seed campaigns ───────────────────────────────────────────────────────────
-export const DEMO_VERSION = 'v4'
+export const DEMO_VERSION = 'v5'
 
 export const SEED_CAMPAIGNS: Campaign[] = [
   // ── 1. Master MMI — Active, 115 candidats (Léa en attente, reste décidé) ──
@@ -278,5 +278,47 @@ Ton de communication : Créatif et bienveillant`,
     totalCandidates: 187,
     processedCandidates: 187,
     candidates: gen('mktg', 187, i => scoreBell(i, 69), decidedStatus, sentValidation, 210 * 24 * 3_600_000),
+  },
+
+  // ── 7. MSc Finance d'Entreprise — Complété, 134 candidats ──
+  {
+    id: 'camp-finance-2024',
+    name: 'MSc Finance d\'Entreprise & Marchés',
+    status: 'closed',
+    createdAt: '2024-08-01T08:00:00.000Z',
+    capacity: 35,
+    startDate: '2024-08-01',
+    endDate: '2025-01-15',
+    schoolCriteria: `Formation visée : MSc Finance d'Entreprise & Marchés Financiers
+Date de début : 01 octobre 2024
+Date de clôture : 15 janvier 2025
+Places : 35
+Prérequis académiques/techniques : Bac+3 minimum en économie, gestion ou mathématiques, anglais B2
+Compétences prioritaires : Analyse financière, modélisation Excel, rigueur analytique, anglais technique
+Ton de communication : Rigoureux et professionnel`,
+    totalCandidates: 134,
+    processedCandidates: 134,
+    candidates: gen('fin', 134, i => scoreBell(i, 73), decidedStatus, sentValidation, 240 * 24 * 3_600_000),
+  },
+
+  // ── 8. Mastère Spécialisé Entrepreneuriat — Complété, 109 candidats ──
+  {
+    id: 'camp-entre-2024',
+    name: 'Mastère Spécialisé Entrepreneuriat & Innovation',
+    status: 'closed',
+    createdAt: '2024-07-15T08:00:00.000Z',
+    capacity: 28,
+    startDate: '2024-07-15',
+    endDate: '2024-12-31',
+    schoolCriteria: `Formation visée : Mastère Spécialisé Entrepreneuriat & Innovation
+Date de début : 15 septembre 2024
+Date de clôture : 31 décembre 2024
+Places : 28
+Prérequis académiques/techniques : Bac+5 ou Bac+3 avec expérience entrepreneuriale, projet de création ou de reprise d'entreprise
+Compétences prioritaires : Vision entrepreneuriale, résilience, leadership, capacité à convaincre
+Ton de communication : Direct, inspirant et exigeant`,
+    totalCandidates: 109,
+    processedCandidates: 109,
+    candidates: gen('entre', 109, i => scoreBell(i, 71), decidedStatus, sentValidation, 270 * 24 * 3_600_000),
   },
 ]
