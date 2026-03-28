@@ -97,7 +97,7 @@ export default function LandingPage({ onGetStarted }: Props) {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover object-right blur-[6px] scale-105"
+          className="absolute inset-0 w-full h-full object-cover object-right"
           src={`${base}hero.mp4`}
         />
 
