@@ -30,9 +30,9 @@ export default function Step4Response({
     setIsSending(true);
     
     // Remplacer ces valeurs par celles de ton compte EmailJS !
-    const SERVICE_ID = "YOUR_SERVICE_ID";
-    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+    const SERVICE_ID = "service_ry8qdnr";
+    const TEMPLATE_ID = "template_7j0715g";
+    const PUBLIC_KEY = "nON6pL1F6sM3y1aI2";
 
     try {
       // On envoie un email pour chaque candidat approuvé
@@ -46,7 +46,7 @@ export default function Step4Response({
             to_name: candidate.name,
             to_email: candidate.email,
             message: candidate.aiEmailDraft,
-            reply_to: "admissions@lighthouse.edu"
+            reply_to: "gadwstudio@gmail.com"
           },
           PUBLIC_KEY
         );
