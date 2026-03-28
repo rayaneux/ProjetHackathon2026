@@ -85,9 +85,9 @@ export default function Step3Generate({
 
   return (
     <Card className="max-w-3xl mx-auto shadow-sm text-center py-12">
-      <CardHeader>
-        <CardTitle className="text-2xl">Étape 3 : Génération de l'Analyse IA</CardTitle>
-        <CardDescription>
+      <CardHeader className="pb-8">
+        <CardTitle className="text-3xl font-serif text-center mb-2">Étape 3 : Génération de l'Analyse IA</CardTitle>
+        <CardDescription className="text-center text-lg">
           L'intelligence artificielle étudie la liste des candidats selon vos critères.
         </CardDescription>
       </CardHeader>

@@ -12,27 +12,24 @@ export default {
         serif: ['"pollen-web"', 'serif'],
       },
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+        background: '#FFFbf4', // Fond beige très chaud
+        foreground: '#1c1b18', // Texte presque noir, chaud
+        brand: {
+          dark: '#1c1b18',
+          purple: '#E0B0FF', // Violet dégradé
+          orange: '#FFD580', // Orange dégradé
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+        card: '#FFFFFF', // Fond des cartes blanc pour contraster
+        'card-foreground': '#1c1b18',
+        primary: {
+          DEFAULT: '#1c1b18', // Boutons noirs
+          foreground: '#FFFbf4', // Texte sur boutons noirs
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: '#f3ece1',
+          foreground: '#716c64',
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
+        border: '#e8e1d5',
       },
       borderRadius: {
         lg: "var(--radius)",

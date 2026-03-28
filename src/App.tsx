@@ -17,13 +17,21 @@ function App() {
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="bg-white border-b border-slate-200 py-4 px-6 flex items-center justify-between">
-        <h1 className="text-xl font-bold tracking-tight">Plateforme d'Admission IA</h1>
-        <div className="text-sm text-slate-500">Prototype Hackathon</div>
+    <div className="min-h-screen bg-background text-foreground selection:bg-brand-purple/30 selection:text-brand-dark">
+      <header className="bg-white/80 backdrop-blur-md border-b border-border py-4 px-8 flex items-center justify-between sticky top-0 z-50">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center shadow-inner">
+            <span className="text-white font-serif font-bold text-lg leading-none">A</span>
+          </div>
+          <h1 className="text-xl font-bold tracking-tight font-serif">Admissio<span className="text-muted-foreground font-sans font-normal text-sm ml-1 px-2 py-0.5 bg-muted rounded-full">AI</span></h1>
+        </div>
+        <div className="flex items-center space-x-4 text-[13px] font-medium text-muted-foreground">
+          <span className="flex items-center"><div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></div>Système Prêt</span>
+          <span className="hidden sm:inline-block px-3 py-1 bg-white border border-border rounded-full shadow-sm">Prototype Hackathon</span>
+        </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-5xl mx-auto px-4 py-12">
         <Stepper currentStep={currentStep} />
         
         <div className="mt-8">

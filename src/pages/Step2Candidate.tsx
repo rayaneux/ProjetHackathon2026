@@ -71,9 +71,9 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
 
   return (
     <Card className="max-w-4xl mx-auto shadow-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Étape 2 : Dossiers Candidats</CardTitle>
-        <CardDescription>
+      <CardHeader className="pb-8">
+        <CardTitle className="text-3xl font-serif text-center mb-2">Étape 2 : Dossiers Candidats</CardTitle>
+        <CardDescription className="text-center text-lg">
           Importez le tableau des élèves avec les informations récupérées dans leurs dossiers de candidature.
         </CardDescription>
       </CardHeader>

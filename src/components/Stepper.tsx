@@ -19,40 +19,33 @@ export function Stepper({ currentStep }: StepperProps) {
   ];
 
   return (
-    <div className="w-full py-6">
-      <div className="flex items-center justify-between w-full max-w-3xl mx-auto px-4">
+    <div className="w-full py-10 mb-6">
+      <div className="flex items-center justify-between w-full max-w-3xl mx-auto px-4 relative">
+        {/* Ligne de fond */}
+        <div className="absolute top-1/2 left-4 right-4 h-[2px] bg-slate-200 -z-10 -translate-y-1/2" />
+        
         {steps.map((step, index) => {
           const isCompleted = currentStep > step.num;
           const isCurrent = currentStep === step.num;
 
           return (
-            <div key={step.num} className="flex flex-col items-center relative flex-1">
-              {/* Connector line */}
-              {index !== 0 && (
-                <div
-                  className={cn(
-                    "absolute top-5 h-[2px] w-full -left-1/2 -z-10",
-                    isCompleted || isCurrent ? "bg-slate-900" : "bg-slate-200"
-                  )}
-                />
-              )}
-
+            <div key={step.num} className="flex flex-col items-center relative z-10">
               <div
                 className={cn(
-                  "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 bg-white transition-colors duration-300 leading-none pt-0.5",
+                  "w-12 h-12 rounded-full flex items-center justify-center text-sm font-semibold border-[3px] transition-all duration-300 leading-none shadow-sm",
                   isCompleted
-                    ? "border-slate-900 bg-slate-900 text-white"
+                    ? "border-primary bg-primary text-white"
                     : isCurrent
-                    ? "border-slate-900 text-slate-900"
-                    : "border-slate-200 text-slate-400"
+                    ? "border-primary bg-white text-primary scale-110 shadow-md"
+                    : "border-slate-200 bg-white text-slate-400"
                 )}
               >
-                {isCompleted ? <Check className="w-5 h-5 -mt-0.5" /> : step.num}
+                {isCompleted ? <Check className="w-6 h-6" /> : <span className="pt-0.5">{step.num}</span>}
               </div>
               <span
                 className={cn(
-                  "mt-3 text-xs md:text-sm font-medium",
-                  isCurrent || isCompleted ? "text-slate-900" : "text-slate-400"
+                  "absolute -bottom-8 whitespace-nowrap text-sm font-medium transition-colors",
+                  isCurrent ? "text-primary" : isCompleted ? "text-slate-600" : "text-slate-400"
                 )}
               >
                 {step.label}

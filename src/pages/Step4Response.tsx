@@ -47,12 +47,12 @@ export default function Step4Response({
 
   return (
     <div className="flex flex-col space-y-6 relative">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Tableau de Bord des Décisions</h2>
-          <p className="text-slate-500">Cliquez sur un candidat pour examiner la proposition de l'IA et valider.</p>
+          <h2 className="text-3xl font-bold font-serif text-slate-900 mb-2">Tableau de Bord des Décisions</h2>
+          <p className="text-slate-500 text-lg">Cliquez sur un candidat pour examiner la proposition de l'IA et valider.</p>
         </div>
-        <div className="text-sm font-medium bg-white px-4 py-2 rounded-lg border border-slate-200 shadow-sm">
+        <div className="text-[15px] font-medium bg-white px-5 py-2.5 rounded-xl border border-slate-200 shadow-sm">
           Reste à valider : <span className="text-brand text-blue-600 font-bold">{pendingCount}</span> / {candidates.length}
         </div>
       </div>

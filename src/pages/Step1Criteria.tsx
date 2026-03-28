@@ -34,9 +34,9 @@ Ton de la réponse : ${tone}
 
   return (
     <Card className="max-w-3xl mx-auto shadow-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Étape 1 : Paramétrage de la Formation</CardTitle>
-        <CardDescription>
+      <CardHeader className="pb-8">
+        <CardTitle className="text-3xl font-serif text-center mb-2">Étape 1 : Paramétrage de la Formation</CardTitle>
+        <CardDescription className="text-center text-lg">
           Définissez précisément les attentes de votre jury d'admission pour configurer l'IA.
         </CardDescription>
       </CardHeader>
