@@ -10,8 +10,8 @@ interface Props {
   onNext: () => void;
 }
 
-export default function Step3Generate({ 
-  schoolCriteria,
+export default function Step3Generate({
+  schoolCriteria: _schoolCriteria,
   candidates,
   setCandidates,
   onNext
@@ -34,42 +34,37 @@ export default function Step3Generate({
     }, 3000);
 
     const timer3 = setTimeout(() => {
-      // Mock des résultats de l'IA pour chaque candidat
+      // Mock des résultats de l'IA pour chaque candidat (scoring)
       const processed: Candidate[] = candidates.map((c, index) => {
-        const decision = c.decision;
-        const firstName = c.name.split(' ')[0] || c.name;
-        
-        if (decision === "accept") {
-          return {
-            ...c,
-            aiExplanation: [
-              "Le profil correspond parfaitement aux standards académiques et aux valeurs de l'établissement.",
-              "Les notes et/ou l'expérience démontrent un réel potentiel de réussite dans notre programme.",
-              "Motivation et maturité en adéquation avec nos exigences."
-            ],
-            aiEmailDraft: `Bonjour ${firstName},\n\nNous avons le grand plaisir de vous annoncer votre admission au sein de notre établissement pour la prochaine rentrée.\n\nVotre dossier a particulièrement retenu l'attention de notre jury. Les éléments que vous avez mis en avant ("${c.profileData.substring(0, 50)}...") démontrent un profil tout à fait en phase avec l'exigence et les valeurs de notre école. Nous sommes convaincus que vous pourrez pleinement vous épanouir dans ce cursus.\n\nVous recevrez prochainement un email contenant les modalités d'inscription définitive.\n\nFélicitations pour cette admission, et au plaisir de vous compter parmi nous !\n\nCordialement,\n\nL'équipe des Admissions.`
-          };
-        } else if (decision === "reject") {
-          return {
-            ...c,
-            aiExplanation: [
-              "Les résultats académiques ou le profil général ne permettent pas de garantir la réussite dans ce cursus exigeant.",
-              "Le dossier est jugé soit trop fragile sur les prérequis, soit en inadéquation avec les attentes du programme.",
-            ],
-            aiEmailDraft: `Bonjour ${firstName},\n\nSuite à l'étude attentive de votre dossier de candidature par notre jury d'admission, nous sommes au regret de vous informer que nous ne pouvons pas donner une suite favorable à votre demande.\n\nMalgré l'intérêt que nous portons à votre profil (notamment concernant : "${c.profileData.substring(0, 40)}..."), le niveau de notre formation et le nombre limité de places nous obligent à une sélection extrêmement rigoureuse cette année. Au vu de la concurrence, d'autres candidatures correspondaient plus précisément à nos prérequis immédiats.\n\nNous vous remercions de l'intérêt porté à notre établissement et vous souhaitons une excellente continuation dans vos futurs projets académiques et professionnels.\n\nCordialement,\n\nL'équipe des Admissions.`
-          };
+        // Génère un score un peu aléatoire pour la démo, avec une courbe pour simuler de bons et mauvais dossiers
+        let score;
+        if (c.id === "1") {
+          score = 98; // On s'assure que le profil détaillé soit toujours premier
         } else {
-          // waitlist ou unknown
-          return {
-            ...c,
-            aiExplanation: [
-              "Le dossier est intéressant mais se situe à la limite de la barre d'admission directe.",
-              "Candidature placée sur liste d'attente dans l'éventualité de désistements.",
-              "Certaines lacunes mineures justifient cette mise en attente par rapport aux dossiers prioritaires."
-            ],
-            aiEmailDraft: `Bonjour ${firstName},\n\nNous vous remercions pour l'intérêt que vous portez à notre établissement.\n\nAprès examen approfondi de votre dossier, le jury d'admission a statué en faveur d'une mise sur liste d'attente. Vos qualités sont indéniables, cependant le nombre restreint de places ("${c.profileData.substring(0, 30)}...") ne nous permet pas de vous formuler une offre d'admission ferme aujourd'hui.\n\nSoyez assuré(e) que nous vous tiendrons informé(e) très rapidement dès qu'un désistement nous permettra de faire évoluer votre situation.\n\nMerci de votre patience.\n\nCordialement,\n\nL'équipe des Admissions.`
-          };
+          const randomScore = Math.floor(Math.random() * 40) + 40 + (index % 3 === 0 ? 15 : 0); 
+          score = Math.min(100, randomScore);
         }
+
+        let aiAnalysis = "";
+        if (score >= 80) {
+          aiAnalysis = "Profil très solide, correspond parfaitement aux exigences académiques de la formation.";
+        } else if (score >= 60) {
+          aiAnalysis = "Dossier intéressant mais présente quelques lacunes sur les prérequis techniques.";
+        } else {
+          aiAnalysis = "Profil fragile, les résultats ou le parcours ne sont pas alignés avec les attentes.";
+        }
+
+        const hadScoreAlready = typeof c.score === "number" && !Number.isNaN(c.score);
+        const keepStatus =
+          hadScoreAlready && (c.status === "accepted" || c.status === "rejected");
+
+        return {
+          ...c,
+          score,
+          aiAnalysis,
+          applicationDate: c.applicationDate || new Date().toISOString(),
+          status: keepStatus ? c.status : "pending",
+        };
       });
       
       setCandidates(processed);
@@ -88,7 +83,7 @@ export default function Step3Generate({
       <CardHeader className="pb-8">
         <CardTitle className="text-3xl font-serif text-center mb-2">Étape 3 : Génération de l'Analyse IA</CardTitle>
         <CardDescription className="text-center text-lg">
-          L'intelligence artificielle étudie la liste des candidats selon vos critères.
+          L'intelligence artificielle analyse les lacunes et rédige des conseils personnalisés.
         </CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col items-center justify-center space-y-6 min-h-[200px]">

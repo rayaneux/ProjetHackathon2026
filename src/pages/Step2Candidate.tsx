@@ -1,9 +1,8 @@
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
-import { UploadCloud, FileSpreadsheet, Trash2, Users } from "lucide-react"
+import { Trash2, Users } from "lucide-react"
 import type { Candidate } from "../types"
 import { useRef, useState } from "react"
-import Papa from "papaparse"
 
 interface Props {
   candidates: Candidate[];
@@ -15,50 +14,68 @@ interface Props {
 export default function Step2Candidate({ candidates, setCandidates, onNext, onPrev }: Props) {
   const hasCandidates = candidates.length > 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState<string>("");
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    setFileName(file.name);
-
-    Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const parsedData = results.data as any[];
-        const mappedCandidates: Candidate[] = parsedData.map((row, index) => ({
-          id: `imported-${index}`,
-          name: row.Nom || row.name || row.Name || "Inconnu",
-          email: row.Email || row.email || "Inconnu",
-          decision: row.Decision || row.decision || "unknown", // Prise en compte de la colonne Decision
-          profileData: row.Dossier_Profil || row.dossier || row.profile || JSON.stringify(row),
-        }));
-        
-        setCandidates(mappedCandidates);
-      }
-    });
-  };
+  const [, setFileName] = useState<string>("");
 
   const handleSimulateUpload = () => {
-    const mockData: Candidate[] = [
-      { id: "1", name: "Léa Martin", email: "gadwstudio@gmail.com", decision: "accept", profileData: "Bac S mention Très Bien. Mathématiques: 18/20, Physique: 17/20. Projet associatif fort en écologie (présidente de club depuis 2 ans). Lettre de motivation très structurée et claire. Anglais courant (TOEIC 920). A participé à un concours national de robotique." },
-      { id: "2", name: "Thomas Dubois", email: "thomas.d@email.com", decision: "reject", profileData: "Bac ES mention Assez Bien. Notes moyennes en mathématiques (10/20) et histoire (11/20). Activité sportive (tennis) niveau régional avec 10h d'entraînement par semaine. Bon niveau en économie (15/20). Lettre de motivation basique." },
-      { id: "3", name: "Sarah Connor", email: "sarah.c@email.com", decision: "accept", profileData: "Reconversion professionnelle (32 ans). Master 2 en Littérature. 5 ans d'expérience en marketing classique chez L'Oréal. Très motivée par le digital, auto-formation en cours sur Codecademy et Coursera (Python, React). Recommandations élogieuses de ses anciens managers." },
-      { id: "4", name: "Lucas Bernard", email: "lucas.b@email.com", decision: "waitlist", profileData: "Bac STI2D mention Bien. Passionné d'informatique depuis l'enfance. Excellentes notes en projet technique (18/20), développement d'une application mobile publiée sur les stores. Difficultés importantes en anglais (8/20) et français (7/20)." },
-      { id: "5", name: "Amira Diallo", email: "amira.d@email.com", decision: "accept", profileData: "Licence 3 de Droit validée avec mention Assez Bien. Profil analytique très rigoureux. Stages de 6 mois pertinents en cabinet d'avocats d'affaires. Souhaite se réorienter vers le management de projet et le business international. Trilingue (Français, Anglais, Arabe)." },
-      { id: "6", name: "Hugo Petit", email: "hugo.p@email.com", decision: "reject", profileData: "Bac STMG sans mention. Dossier très faible. Mathématiques: 6/20, Philosophie: 5/20. Nombreuses absences injustifiées (plus de 30 demi-journées). Lettre de motivation qui semble générique ou copiée-collée d'internet. Aucune activité extra-scolaire renseignée." },
-      { id: "7", name: "Clara Leroy", email: "clara.l@email.com", decision: "accept", profileData: "Hypokhâgne AL. Excellents résultats en prépa littéraire, 2ème de sa classe en Lettres. Esprit de synthèse remarquable. Veut intégrer un master en communication d'entreprise. Très bonne plume, tient un blog suivi par 5000 personnes sur l'actualité culturelle." },
-      { id: "8", name: "Marc Antoine", email: "marc.a@email.com", decision: "waitlist", profileData: "BTS Commerce International obtenu au rattrapage. Profil commercial affirmé, mais résultats académiques justes (10.5 de moyenne générale). A monté sa propre micro-entreprise de revente en ligne de sneakers à 19 ans qui génère un vrai chiffre d'affaires. Dynamique mais brouillon." },
-      { id: "9", name: "Sophie Dubois", email: "sophie.d@email.com", decision: "waitlist", profileData: "Licence d'Histoire de l'Art. Profil atypique mais extrêmement curieux. Notes hétérogènes (de 8 à 18 selon la matière). Expérience de 6 mois de bénévolat dans un musée au Pérou. Veut s'orienter vers la gestion de projets culturels numérisés." },
-      { id: "10", name: "Antoine Griezmann", email: "antoine.g@email.com", decision: "reject", profileData: "Ancien sportif de haut niveau en reconversion suite à une blessure. Grande capacité de travail, leadership naturel (capitaine d'équipe), et résistance au stress. Aucune base académique récente en gestion d'entreprise, mais une volonté de fer prouvée lors de sa rééducation." },
-      { id: "11", name: "Juliette Rousseau", email: "juliette.r@email.com", decision: "accept", profileData: "Master 1 en biologie moléculaire mention Très Bien. Major de promo. Excellente élève scientifique. Cherche une double compétence en management de l'innovation pour travailler dans l'industrie pharmaceutique. Stage R&D chez Sanofi très bien noté." },
-      { id: "12", name: "Maxime Chen", email: "maxime.c@email.com", decision: "reject", profileData: "Licence LEA (Langues Étrangères Appliquées). Candidature incomplète : la lettre de motivation n'a pas été fournie. Notes moyennes tournant autour de 11/20. Semble postuler 'au hasard'. Bon niveau en mandarin." },
-      { id: "13", name: "Elodie Farès", email: "elodie.f@email.com", decision: "accept", profileData: "3 ans d'expérience comme assistante RH après un BTS. Souhaite reprendre ses études pour un Master RH en alternance. Profil très structuré, excellentes recommandations écrites de la directrice RH de son entreprise actuelle. Très pragmatique." },
-      { id: "14", name: "Nicolas Moreau", email: "nicolas.m@email.com", decision: "waitlist", profileData: "Profil très entrepreneurial. N'a pas validé sa L2 d'éco-gestion (notes très faibles) car il a créé 2 startups en parallèle (qui ont fini par échouer). Il a rédigé une lettre fascinante sur les leçons qu'il a tirées de ces échecs. Profil 'risqué' mais avec un énorme potentiel pratique." },
-      { id: "15", name: "Alice Dupont", email: "alice.d@email.com", decision: "reject", profileData: "Excellents résultats au Baccalauréat (Mention TB avec Félicitations du jury). Vient de rater sa première année de médecine (PASS) de quelques places. Cherche à se réorienter d'urgence. Très travailleuse, excellente capacité de mémorisation, mais semble un peu perdue sur son avenir pro." },
-    ];
+    const firstNames = ["Léa", "Thomas", "Marie", "Hugo", "Camille", "Lucas", "Chloé", "Antoine", "Sarah", "Paul", "Julie", "Arthur", "Emma", "Maxime", "Manon", "Alexandre", "Laura", "Victor", "Alice", "Nicolas"];
+    const lastNames = ["Martin", "Bernard", "Thomas", "Petit", "Robert", "Richard", "Durand", "Dubois", "Moreau", "Laurent", "Simon", "Michel", "Lefevre", "Leroy", "Roux", "David", "Bertrand", "Morel", "Fournier", "Girard"];
+    
+    const mockData: Candidate[] = [];
+    const now = new Date().getTime();
+    
+    for (let i = 0; i < 100; i++) {
+      const fName = firstNames[i % 20];
+      const lName = lastNames[Math.floor(i / 5) % 20];
+      // Date aléatoire dans les 30 derniers jours
+      const randomDate = new Date(now - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000);
+      
+      let profileData = "Dossier académique solide avec de bons résultats dans les matières principales. Motivation démontrée par plusieurs expériences associatives.";
+      
+      if (i === 0) {
+        profileData = `Dossier de candidature - ${fName} ${lName}
+
+[PARCOURS ACADÉMIQUE]
+• Licence 3 en cours : Économie et Gestion (Université Paris 1 Panthéon-Sorbonne)
+  - Moyenne globale estimée (S5) : 13.5/20
+  - Points forts : Statistiques (16/20), Macroéconomie (15/20), Anglais (18/20)
+  - Points faibles : Comptabilité de gestion (9/20), Droit des affaires (10/20)
+• Baccalauréat Général (Spécialités : Mathématiques, Sciences Économiques et Sociales)
+  - Mention : Bien (15.2/20)
+
+[EXPÉRIENCES PROFESSIONNELLES]
+• Stage de 3 mois (Juin - Août 2025) : Assistant Chef de Produit chez L'Oréal (Paris)
+  - Analyse concurrentielle du marché des cosmétiques éco-responsables
+  - Participation à l'élaboration de la stratégie marketing digitale
+• Job étudiant (Depuis Septembre 2024) : Vendeur à temps partiel chez Zara (10h/semaine)
+  - Gestion de la relation client et des encaissements
+  - Développement de compétences en vente et en gestion du stress
+
+[ACTIVITÉS EXTRA-SCOLAIRES & SOFT SKILLS]
+• Trésorier du Bureau des Étudiants (BDE) de l'Université (2024-2025)
+  - Gestion d'un budget de 15 000 €
+  - Organisation d'événements pour 500 étudiants (gala de fin d'année, week-end d'intégration)
+• Bénévole actif au sein de la Croix-Rouge Française (Maraudes hebdomadaires)
+• Compétences relationnelles (Soft skills) déduites : Fort leadership, esprit d'équipe, très grande rigueur financière et empathie.
+
+[LETTRE DE MOTIVATION (EXTRAIT)]
+"Je souhaite intégrer votre Master en Management de l'Innovation car il représente pour moi le prolongement logique de mon parcours. Mon expérience chez L'Oréal m'a fait prendre conscience de l'importance d'allier performance économique et impact environnemental. J'ai particulièrement été attiré par votre module 'Green Business Models' et par les projets de groupe avec des entreprises partenaires. Mon engagement associatif en tant que trésorier m'a appris à gérer des projets de A à Z avec rigueur, une compétence que je compte bien mettre au service de la vie étudiante de votre école."
+
+[LANGUES & OUTILS]
+• Anglais : Courant (TOEIC 910/990)
+• Espagnol : Intermédiaire (B2)
+• Outils : Suite Office (Expert sur Excel), Canva, Notions en Python.`;
+      }
+
+      mockData.push({
+        id: (i + 1).toString(),
+        name: `${fName} ${lName}`,
+        email: i === 0 ? "gadwstudio@gmail.com" : `${fName.toLowerCase()}.${lName.toLowerCase()}@email.com`,
+        profileData: profileData,
+        applicationDate: randomDate.toISOString(),
+        status: "pending"
+      });
+    }
+
     setFileName("candidats_mock.csv");
     setCandidates(mockData);
   };
@@ -74,46 +91,44 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
       <CardHeader className="pb-8">
         <CardTitle className="text-3xl font-serif text-center mb-2">Étape 2 : Dossiers Candidats</CardTitle>
         <CardDescription className="text-center text-lg">
-          Importez le tableau des élèves avec les informations récupérées dans leurs dossiers de candidature.
+          Supervisez les dossiers reçus en temps réel avant de lancer l'analyse IA.
         </CardDescription>
       </CardHeader>
       
       <CardContent className="space-y-6">
         {!hasCandidates ? (
           <div 
-            className="border-2 border-dashed border-slate-300 rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-50 transition-colors"
-            onClick={() => fileInputRef.current?.click()}
+            className="border-2 border-dashed border-slate-300 rounded-xl p-12 flex flex-col items-center justify-center text-center bg-slate-50/50"
           >
-            <input 
-              type="file" 
-              ref={fileInputRef} 
-              className="hidden" 
-              accept=".csv"
-              onChange={handleFileUpload}
-            />
             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4">
-              <UploadCloud className="w-8 h-8" />
+              <Users className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-1">Cliquez pour importer votre fichier CSV</h3>
-            <p className="text-slate-500 max-w-sm mb-4">
-              Le fichier CSV doit idéalement contenir les colonnes : Nom, Email, Dossier_Profil.
+            <h3 className="text-lg font-semibold text-slate-900 mb-1">En attente de nouvelles candidatures...</h3>
+            <p className="text-slate-500 max-w-sm mb-6">
+              Votre CRM est prêt. Les dossiers des candidats apparaîtront ici automatiquement dès qu'ils postuleront à votre formation.
             </p>
-            <div className="flex gap-4 mt-2">
-              <Button variant="outline">Parcourir les fichiers</Button>
-              <Button variant="secondary" onClick={(e) => { e.stopPropagation(); handleSimulateUpload(); }}>Utiliser données test</Button>
+            <div className="flex flex-col items-center gap-3 w-full max-w-xs">
+              <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider w-full flex items-center gap-2">
+                <div className="flex-1 h-px bg-slate-200"></div>
+                Mode Démo
+                <div className="flex-1 h-px bg-slate-200"></div>
+              </div>
+              <Button onClick={handleSimulateUpload} className="w-full bg-slate-900 text-white hover:bg-slate-800">
+                Simuler la réception de 100 dossiers
+              </Button>
             </div>
           </div>
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between bg-slate-100 p-4 rounded-lg">
               <div className="flex items-center space-x-3">
-                <FileSpreadsheet className="w-6 h-6 text-green-600" />
+                <Users className="w-6 h-6 text-blue-600" />
                 <div>
-                  <p className="font-semibold text-slate-900">{fileName || "import_candidats.csv"}</p>
-                  <p className="text-xs text-slate-500">{candidates.length} candidats importés avec succès</p>
+                  <p className="font-semibold text-slate-900">Flux de candidatures synchronisé</p>
+                  <p className="text-xs text-slate-500">{candidates.length} dossiers reçus en attente d'analyse</p>
                 </div>
               </div>
-              <Button variant="outline" size="icon" onClick={clearCandidates} className="text-red-500 hover:text-red-700 hover:bg-red-50">
+              <Button variant="outline" size="icon" onClick={clearCandidates} className="text-red-500 hover:text-red-700 hover:bg-red-50" title="Vider la liste (Démo)">
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
@@ -154,7 +169,7 @@ export default function Step2Candidate({ candidates, setCandidates, onNext, onPr
           Retour
         </Button>
         <Button onClick={onNext} disabled={!hasCandidates}>
-          Lancer l'Analyse IA <Users className="w-4 h-4 ml-2" />
+          Analyse des lacunes et rédaction <Users className="w-4 h-4 ml-2" />
         </Button>
       </CardFooter>
     </Card>
