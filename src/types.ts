@@ -12,5 +12,5 @@ export type Candidate = {
   aiEmailDraft?: string;
   
   // Validation utilisateur
-  userValidation?: "approved" | "rejected" | "modified" | "pending";
+  userValidation?: "approved" | "rejected" | "modified" | "pending" | "sent";
 };

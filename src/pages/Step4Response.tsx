@@ -56,7 +56,12 @@ export default function Step4Response({
       }
       
       alert(`✅ Succès ! ${approvedCandidates.length} email(s) envoyé(s) avec succès.`);
-      onReset();
+      
+      // On passe les candidats "approved" en "sent" pour ne pas les renvoyer en double
+      setCandidates(candidates.map(c => 
+        c.userValidation === 'approved' ? { ...c, userValidation: 'sent' as any } : c
+      ));
+
     } catch (error) {
       console.error("Erreur lors de l'envoi des emails:", error);
       alert("❌ Une erreur est survenue lors de l'envoi des emails. Vérifiez la console ou vos clés EmailJS.");
@@ -116,6 +121,7 @@ export default function Step4Response({
                   <div className="flex space-x-4 items-center">
                     {getDecisionBadge(c.aiDecision)}
                     <div className="w-24 text-right">
+                      {c.userValidation === 'sent' && <span className="text-xs text-blue-600 font-medium inline-flex items-center"><Send className="w-3 h-3 mr-1"/> Envoyé</span>}
                       {c.userValidation === 'approved' && <span className="text-xs text-green-600 font-medium inline-flex items-center"><Check className="w-3 h-3 mr-1"/> Validé</span>}
                       {c.userValidation === 'rejected' && <span className="text-xs text-red-600 font-medium inline-flex items-center"><XCircle className="w-3 h-3 mr-1"/> Annulé</span>}
                       {(!c.userValidation || c.userValidation === 'pending') && <span className="text-xs text-slate-400 font-medium inline-flex items-center">À traiter</span>}
@@ -208,7 +214,7 @@ export default function Step4Response({
             {/* Actions Pop-up */}
             <div className="p-4 border-t border-slate-100 bg-slate-50 rounded-b-lg flex justify-between items-center relative z-10">
               <span className="text-sm text-slate-500">
-                Statut : {selectedCandidate.userValidation === 'approved' ? '✅ Prêt à l\'envoi' : selectedCandidate.userValidation === 'rejected' ? '❌ Rejeté' : '⏳ En attente de validation'}
+                Statut : {selectedCandidate.userValidation === 'sent' ? '📨 Déjà envoyé' : selectedCandidate.userValidation === 'approved' ? '✅ Prêt à l\'envoi' : selectedCandidate.userValidation === 'rejected' ? '❌ Rejeté' : '⏳ En attente de validation'}
               </span>
               <div className="space-x-3">
                 <Button 
@@ -221,6 +227,7 @@ export default function Step4Response({
                 <Button 
                   className="bg-green-600 hover:bg-green-700 text-white"
                   onClick={() => updateCandidateValidation(selectedCandidate.id, 'approved')}
+                  disabled={selectedCandidate.userValidation === 'sent'}
                 >
                   Valider l'email
                 </Button>
