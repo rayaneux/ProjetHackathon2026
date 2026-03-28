@@ -20,9 +20,7 @@ function App() {
     <div className="min-h-screen bg-background text-foreground selection:bg-brand-purple/30 selection:text-brand-dark">
       <header className="bg-white/80 backdrop-blur-md border-b border-border py-4 px-8 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-purple to-brand-orange flex items-center justify-center shadow-inner">
-            <span className="text-white font-serif font-bold text-lg leading-none">L</span>
-          </div>
+          <img src="/logo.png" alt="Lighthouse Logo" className="h-8 w-auto object-contain" />
           <h1 className="text-xl font-bold tracking-tight font-serif">Lighthouse</h1>
         </div>
         <div className="flex items-center space-x-4 text-[13px] font-medium text-muted-foreground">
