@@ -18,8 +18,10 @@ function App() {
   // Navigation
   const [currentView, setCurrentView] = useState<"dashboard" | "funnel" | "school_landing" | "landing" | "forms" | "onboarding">(() => {
     const path = window.location.pathname;
-    if (path === "/school") return "school_landing";
-    if (path === "/app") return "dashboard";
+    const qp = new URLSearchParams(window.location.search);
+    const view = qp.get('view');
+    if (path.endsWith('/school') || view === 'school') return "school_landing";
+    if (path.endsWith('/app')    || view === 'app')    return "dashboard";
     return "landing";
   });
   const [currentStep, setCurrentStep] = useState(1);

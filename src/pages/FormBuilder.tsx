@@ -205,7 +205,8 @@ export default function FormBuilder({ forms, setForms }: Props) {
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    const iframeCode = `<iframe src="${window.location.origin}/school?formId=${form.id}&embed=true" width="100%" height="800" frameborder="0" style="background:transparent; border:none;"></iframe>`;
+                    const base = import.meta.env.BASE_URL;
+                    const iframeCode = `<iframe src="${window.location.origin}${base}?view=school&formId=${form.id}&embed=true" width="100%" height="800" frameborder="0" style="background:transparent; border:none;"></iframe>`;
                     navigator.clipboard.writeText(iframeCode);
                     showToast(`Code d'intégration copié pour « ${form.name} »`, "success");
                   }}

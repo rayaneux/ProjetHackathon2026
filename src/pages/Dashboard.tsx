@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button } from "../components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card"
-import { Plus, FolderOpen, ArrowRight, CheckCircle2, GripHorizontal, ChevronDown, Trash2, RotateCcw, ChevronUp, Pencil } from "lucide-react"
+import { Plus, FolderOpen, ArrowRight, CheckCircle2, GripHorizontal, ChevronDown, Trash2, RotateCcw, ChevronUp, Pencil, Link2 } from "lucide-react"
 import type { Campaign, Form } from "../types"
 import { showToast } from "../components/Toaster"
 
@@ -309,9 +309,26 @@ export default function Dashboard({ campaigns, forms, onCreateNew, onSelectCampa
                                 });
                               })()}
                             </div>
-                            <div className="flex items-center gap-1 text-xs font-semibold text-slate-600 group-hover:text-brand-dark transition-colors">
-                              <span>{progress === 100 ? "Voir le rapport" : "Ouvrir le dossier"}</span>
-                              <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                            <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const base = import.meta.env.BASE_URL;
+                                  const url = `${window.location.origin}${base}?view=school&campaignId=${camp.id}`;
+                                  navigator.clipboard.writeText(url);
+                                  showToast("Lien candidat copié !", "success");
+                                }}
+                                title="Copier le lien du formulaire candidat"
+                                className="flex items-center gap-1 text-xs font-semibold text-slate-400 hover:text-brand-dark hover:bg-slate-100 px-2 py-1 rounded-lg transition-colors"
+                              >
+                                <Link2 className="w-3.5 h-3.5" />
+                                <span className="hidden sm:inline">Lien candidat</span>
+                              </button>
+                              <div className="flex items-center gap-1 text-xs font-semibold text-slate-600 group-hover:text-brand-dark transition-colors">
+                                <span>{progress === 100 ? "Voir le rapport" : "Ouvrir le dossier"}</span>
+                                <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
+                              </div>
                             </div>
                           </div>
                         </CardFooter>

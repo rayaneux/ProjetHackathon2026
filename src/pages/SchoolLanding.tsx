@@ -93,10 +93,12 @@ export default function SchoolLanding({ onApply }: Props) {
 
   const handlePostulerClick = () => {
     const q = new URLSearchParams();
+    q.set('view', 'school');
     if (campaignId) q.set('campaignId', campaignId);
     if (formId) q.set('formId', formId);
     q.set('embed', 'true');
-    window.open(`/school?${q.toString()}`, '_blank');
+    const base = import.meta.env.BASE_URL;
+    window.open(`${window.location.origin}${base}?${q.toString()}`, '_blank');
   };
 
   const formContent = (
